@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+	/* common */
+	--card-border-radius: 10px;
+	--body-bg: #f1f4fb;
+	--box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.05);
+
+	/* navbar  */
+	--project-name-color: #006d77;
+	--instructor-bg-color: #006d77;
+	--student-bg-color: #0ead69;
+
+	/* homepage-left */
+	--hover-bg-color: hsl(252, 30%, 95%);
+
+	/* homepage right  */
+	--selected-user-color: #006d77;
+
+	/* right - input-box  */
+	--input-box-container-bg: #d5eef7;
+	--input-box-bg: white;
+	--input-box-btn-bg: #0ead69;
+	--input-box-btn-color: white;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+}
+
+body {
+	background-color: var(--body-bg);
+	overflow-x: hidden;
+}
+
+.profile-img {
+	width: 50px;
+	min-width: 50px;
+	height: 50px;
+	min-height: 50px;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+	overflow: hidden;
+	object-fit: cover;
+	object-position: center;
+}
+
+::selection {
+	background: #80ed99;
+}
+
+/* Scrollbar Styling  start */
+::-webkit-scrollbar {
+	width: 4px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: transparent;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	background: #7400b8;
+}
+/* Scrollbar Styling  end */
+
+/* input - number remove arrow start */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+/* input - number remove arrow end */
+
+/* skeleton style start  */
+.width-skeleton {
+	padding: 18px;
+	margin: 9px 0;
+	min-width: 60%;
+	max-width: 100%;
+}
+
+.circle-skeleton {
+	padding: 18px;
+	margin: 9px 0;
+	width: 60px !important;
+	height: 60px !important;
+	border-radius: 50% !important;
+	margin-left: 20px;
+}
+
+#whenIsLoadingOverFlow {
+	overflow: hidden;
+}
+
+/* skeleton style end  */

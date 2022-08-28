@@ -1,0 +1,635 @@
+.appointment-details-container {
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+.appointment-details-container .layout-center {
+	display: flex;
+	justify-content: center;
+}
+
+.appointment-details-container .appointment-details {
+	background-color: white;
+	border-radius: var(--card-border-radius);
+	box-shadow: var(--box-shadow);
+	min-height: fit-content;
+	max-height: 81vh;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding: 0 30px;
+	position: relative;
+	padding-bottom: 15px;
+}
+
+.appointment-details#appt-blur {
+	filter: blur(1.7px);
+}
+
+/* header style start  */
+.appointment-details .header {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+	height: max-content;
+}
+
+.appointment-details .header .user-info {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: fit-content;
+}
+
+.appointment-details .header .user-info:last-child {
+	margin: 0 30px 0 10px;
+}
+
+.header .user-info .profile-img {
+	width: 60px;
+	min-width: 60px;
+	height: 60px;
+	min-height: 60px;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+	overflow: hidden;
+	object-fit: cover;
+	object-position: center;
+}
+
+.header .user-info .info {
+	display: flex;
+	align-self: center;
+	flex-direction: column;
+	margin: 4px 0 0 7px;
+}
+
+.header .user-info .info h6 {
+	display: inline-block;
+	text-transform: capitalize;
+	font-weight: 600;
+	height: fit-content;
+	margin: 0;
+	font-size: 17px;
+	color: #006d77;
+	max-width: 180px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.header .user-info .info h6:last-child {
+	text-align: start;
+	margin-top: 5px;
+	font-weight: 500;
+}
+
+.appointment-details .subject {
+	flex-grow: 1;
+	width: fit-content;
+	height: fit-content;
+	padding: 0 20px;
+	margin-top: 7px;
+}
+
+.appointment-details .subject h3 {
+	text-align: center;
+	text-transform: capitalize;
+	color: #006d77;
+	font-weight: 600;
+	margin: 0;
+	font-size: 21px;
+}
+/* header style end  */
+
+/* details style start  */
+.appointment-details .details {
+	display: flex;
+	flex-direction: column;
+	margin: 10px 0 0 0;
+}
+.appointment-details .details > div {
+	display: flex;
+}
+
+.appointment-details .details > div span {
+	font-weight: 600;
+	min-width: 12%;
+	max-width: fit-content;
+}
+.appointment-details .details > div p {
+	text-align: justify;
+	flex-grow: 1;
+	margin: 0;
+}
+
+.appointment-details .details .for-margin {
+	margin-top: 15px;
+}
+
+/* top row style start  */
+.appointment-details .details .top-row {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.appointment-details .details .top-row > div {
+	display: flex;
+	align-items: center;
+}
+
+.appointment-details .details .top-row > div p {
+	margin: 0;
+}
+
+.details .top-row #category {
+	flex-grow: 1;
+}
+
+.details .top-row #category p {
+	margin-left: 4.7%;
+}
+
+.details .top-row #date p {
+	margin-left: 18px;
+}
+
+/* top row style end  */
+
+.appointment-details .details .description {
+	flex-grow: 1;
+	margin-left: 10px;
+}
+
+.appointment-details .details .description p {
+	border: 2px solid #dee2e6;
+	padding: 5px 10px;
+	border-radius: 10px;
+	height: 150px;
+	overflow-y: scroll;
+	line-height: 165%;
+	letter-spacing: 0.5px;
+	word-wrap: break-word;
+	word-spacing: 0.2rem;
+}
+
+.appointment-details .details .attachments {
+	display: flex;
+	align-items: center;
+}
+
+.appointment-details .details .attachments a {
+	color: #006d77;
+	font-weight: 500;
+	margin-right: 20px;
+	text-decoration: none;
+}
+
+.appointment-details .details .attachments a:hover {
+	text-decoration: underline;
+}
+
+.appointment-details .details .attachments h6 {
+	margin: 0 0 0 10px;
+	color: #006d77;
+	font-weight: 500;
+}
+
+.appointment-details .details #status {
+	margin: 15px 0 0 0;
+}
+
+.appointment-details .details #status p {
+	font-weight: 500;
+	color: #006d77;
+	text-transform: capitalize;
+}
+
+.appointment-details .details #appointment-date {
+	margin: 15px 0 5px 0;
+}
+
+.appointment-details .details #appointment-date p {
+	font-weight: 500;
+	color: #006d77;
+}
+
+/* details style end  */
+
+/* advisor-section style start  */
+.appointment-details .advisor-section {
+	display: flex;
+	margin-top: 20px;
+}
+
+.appointment-details .advisor-section span {
+	flex-basis: 12%;
+	font-weight: 600;
+}
+
+.appointment-details .advisor-section .wrapper {
+	flex-grow: 1;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.advisor-section .wrapper .app-date .date-picker {
+	padding: 10px 15px;
+	background-color: white;
+	box-shadow: 0 0 20px 2px rgb(0 0 0 / 5%);
+	border-radius: 10px;
+	font-weight: 500;
+	border: 2px solid #dee2e6;
+}
+
+.wrapper .app-date .react-datetime-picker__wrapper {
+	border: none;
+	font-weight: 500;
+}
+
+.app-date .react-datetime-picker__clock {
+	width: 165px;
+	height: 165px;
+	max-width: 100vw;
+	background-color: white;
+	border: thin solid #a0a096;
+	padding: 7px;
+}
+
+.appointment-details .advisor-section .app-status {
+	display: flex;
+	flex-grow: 1;
+	justify-content: flex-end;
+}
+
+.advisor-section .app-status #solved {
+	display: flex;
+	padding: 10px 15px;
+	background-color: white;
+	box-shadow: 0 0 20px 2px rgb(0 0 0 / 5%);
+	border-radius: 10px;
+	font-weight: 500;
+	border: 2px solid #dee2e6;
+	cursor: pointer;
+}
+
+.advisor-section .app-status #solved:hover {
+	background-color: #c1f7e6;
+	transition: background-color 0.5s;
+}
+
+.advisor-section .app-status #solved:active {
+	transform: scale(0.98);
+}
+
+.advisor-section .app-status #pending {
+	display: flex;
+	padding: 10px 15px;
+	background-color: white;
+	box-shadow: 0 0 20px 2px rgb(0 0 0 / 5%);
+	margin: 0 20px;
+	font-weight: 500;
+	border-radius: 10px;
+	border: 2px solid #dee2e6;
+	cursor: pointer;
+}
+
+.advisor-section .app-status #pending:hover {
+	background-color: #e1dcec;
+	transition: background-color 0.5s;
+}
+
+.advisor-section .app-status #pending:active {
+	transform: scale(0.98);
+}
+
+.advisor-section .app-status #rejected {
+	display: flex;
+	padding: 10px 15px;
+	background-color: white;
+	font-weight: 500;
+	box-shadow: 0 0 20px 2px rgb(0 0 0 / 5%);
+	border-radius: 10px;
+	border: 2px solid #dee2e6;
+	cursor: pointer;
+}
+
+.advisor-section .app-status #rejected:hover {
+	background-color: #fff2e5;
+	transition: background-color 0.5s;
+}
+
+.advisor-section .app-status #rejected:active {
+	transform: scale(0.98);
+}
+
+.advisor-section .app-status .icon-container {
+	padding: 2px 7px;
+	border-radius: 50%;
+	margin-left: 10px;
+	align-self: center;
+}
+
+.advisor-section #solved .icon-container {
+	background-color: #e6faf4;
+	color: #06d6a0;
+}
+
+.advisor-section #pending .icon-container {
+	background-color: #f2eff9;
+	color: #7209b7;
+}
+
+.advisor-section #rejected .icon-container {
+	background-color: #fff2e5;
+	color: #f3722c;
+}
+
+.advisor-section .app-status .active {
+	outline: 4px solid #46ee65;
+}
+
+/* outside advisor section start  */
+.appointment-details #outside-advisor {
+	display: flex;
+	margin-top: 15px;
+	align-items: flex-start;
+}
+
+.appointment-details #outside-advisor .wrapper {
+	flex-grow: 1;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	display: none;
+	padding: 0 0 0 6.5%;
+}
+
+.appointment-details #outside-advisor span {
+	max-width: 12%;
+	font-weight: 600;
+}
+
+.appointment-details #outside-advisor #solved {
+	display: flex;
+	padding: 10px 15px;
+	background-color: white;
+	box-shadow: 0 0 20px 2px rgb(0 0 0 / 5%);
+	border-radius: 10px;
+	font-weight: 500;
+	border: 2px solid #dee2e6;
+	cursor: pointer;
+}
+
+.appointment-details #outside-advisor #solved:hover {
+	background-color: #c1f7e6;
+	transition: background-color 0.5s;
+}
+
+.appointment-details #outside-advisor #solved:active {
+	transform: scale(0.98);
+}
+
+.appointment-details #outside-advisor #pending {
+	display: flex;
+	padding: 10px 15px;
+	background-color: white;
+	box-shadow: 0 0 20px 2px rgb(0 0 0 / 5%);
+	margin: 0 20px;
+	font-weight: 500;
+	border-radius: 10px;
+	border: 2px solid #dee2e6;
+	cursor: pointer;
+}
+
+.appointment-details #outside-advisor #pending:hover {
+	background-color: #e1dcec;
+	transition: background-color 0.5s;
+}
+
+.appointment-details #outside-advisor #pending:active {
+	transform: scale(0.98);
+}
+
+.appointment-details #outside-advisor #rejected {
+	display: flex;
+	padding: 10px 15px;
+	background-color: white;
+	font-weight: 500;
+	box-shadow: 0 0 20px 2px rgb(0 0 0 / 5%);
+	border-radius: 10px;
+	border: 2px solid #dee2e6;
+	cursor: pointer;
+}
+
+.appointment-details #outside-advisor #rejected:hover {
+	background-color: #fff2e5;
+	transition: background-color 0.5s;
+}
+
+.appointment-details #outside-advisor #rejected:active {
+	transform: scale(0.98);
+}
+
+.appointment-details #outside-advisor .icon-container {
+	padding: 2px 7px;
+	border-radius: 50%;
+	margin-left: 10px;
+	align-self: center;
+}
+
+#outside-advisor #solved .icon-container {
+	background-color: #e6faf4;
+	color: #06d6a0;
+}
+
+#outside-advisor #pending .icon-container {
+	background-color: #f2eff9;
+	color: #7209b7;
+}
+
+#outside-advisor #rejected .icon-container {
+	background-color: #fff2e5;
+	color: #f3722c;
+}
+
+#outside-advisor .active {
+	outline: 4px solid #46ee65;
+}
+
+/* outside advisor section end  */
+/* advisor-section style end  */
+
+/* reply-link section start  */
+
+.appointment-details .reply-link {
+	margin-top: 10px;
+}
+
+.appointment-details .reply-link h6 {
+	font-weight: 600;
+	text-decoration: underline;
+	color: #006d77;
+	cursor: pointer;
+	display: inline-block;
+	margin: 0;
+}
+
+.appointment-details .reply-link h6:hover {
+	color: #0a9396;
+	transition: all 0.5s;
+}
+/* reply-link section end  */
+
+/* reply-box-container start  */
+.reply-box-container {
+	margin: 15px 0;
+	display: flex;
+}
+
+.reply-box-container span {
+	flex-basis: 12%;
+	font-weight: 600;
+}
+
+.reply-box-container .reply-box {
+	display: flex;
+	width: 100%;
+	align-items: flex-end;
+}
+
+.reply-box-container #reply-box {
+	border: 1px solid #d3dfea;
+	padding: 15px 20px 0px 20px;
+	line-height: 200%;
+	letter-spacing: 0.5px;
+	word-wrap: break-word;
+	word-spacing: 0.2rem;
+	overflow: auto;
+	border-radius: 10px;
+	flex-grow: 1;
+}
+
+.reply-box-container .reply-box button {
+	margin-left: 20px;
+	padding: 7px 15px;
+	color: white;
+	font-weight: 500;
+}
+
+.reply-box-container .reply-box button:hover {
+	transform: scale(1.04);
+}
+
+.reply-box-container .reply-box button:active {
+	transform: scale(0.97);
+}
+
+.reply-box-container #reply-box:focus {
+	outline: 4px solid #c2daff;
+}
+/* reply-box-container end  */
+
+/* delete controller style start  */
+.appointment-details .delete-controller {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 10px;
+}
+
+.appointment-details .delete-controller button {
+	padding: 7px 20px;
+	font-size: 17px;
+	font-weight: 500;
+}
+
+.appointment-details .delete-controller button:hover {
+	transform: scale(1.04);
+}
+
+.appointment-details .delete-controller button:active {
+	transform: scale(0.97);
+}
+
+.appointment-details .delete-controller button:first-child {
+	margin-right: 30px;
+	color: white;
+}
+
+.appointment-details .conformation-popup {
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 0 5px 5px red;
+	padding: 35px 35px 10px 35px;
+	position: absolute;
+	left: 33%;
+	top: 28%;
+}
+
+.appointment-details .conformation-popup .delete-controller {
+	margin-top: 20px;
+}
+
+/* delete controller style end  */
+
+/* for close button style start  */
+.appointment-details .icon {
+	padding: 2px 9px;
+	border-radius: 50%;
+	background-color: #fff2e5;
+	color: #f3722c;
+	font-size: 28px;
+	cursor: pointer;
+	align-self: center;
+	position: absolute;
+	top: 6px;
+	right: 3px;
+}
+
+.appointment-details .icon:hover {
+	transform: scale(1.09);
+}
+
+.appointment-details .icon:active {
+	transform: scale(0.97);
+}
+/* for close button style end  */
+
+/* media query start  */
+@media screen and (max-width: 1200px) {
+	.appointment-details .advisor-section .app-date {
+		margin: 0 0 0 10px;
+	}
+	.appointment-details .advisor-section .app-status {
+		display: none;
+	}
+
+	.appointment-details #outside-advisor .wrapper {
+		display: flex;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.appointment-details .header {
+		flex-wrap: wrap;
+	}
+
+	.appointment-details .header .user-info:first-child {
+		order: 1;
+		flex-basis: 45%;
+	}
+
+	.appointment-details .header .user-info:last-child {
+		order: 2;
+		flex-basis: 45%;
+		display: flex;
+		justify-content: end;
+	}
+
+	.appointment-details .header .subject {
+		flex-basis: 100%;
+		order: 3;
+		margin-top: 10px;
+	}
+}

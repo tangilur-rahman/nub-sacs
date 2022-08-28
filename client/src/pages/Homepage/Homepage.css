@@ -1,0 +1,99 @@
+.homepage-main-container {
+	margin: 20px 0 0 0;
+	position: relative;
+	overflow: hidden;
+}
+
+.homepage-main-container .homepage-container {
+	display: flex;
+	justify-content: center;
+	flex-grow: 1;
+}
+
+.homepage-main-container #blur {
+	filter: blur(1.5px);
+	background-color: #e9ecef;
+}
+
+.homepage-container .left {
+	margin-right: 15px;
+	max-width: 300px;
+}
+
+.homepage-container .right {
+	flex-grow: 1;
+	border-radius: 0 10px 0 0;
+	box-shadow: var(--box-shadow);
+	position: relative;
+	overflow: hidden;
+	padding: 0;
+}
+
+/* loading-container style start  */
+.loading-animation {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 50px;
+	display: flex;
+	align-items: center;
+}
+
+.loading-animation .obj {
+	width: 6px;
+	height: 0px;
+	background: #17a2b8;
+	margin: 0 3px;
+	border-radius: 10px;
+	animation: loading 1.2s infinite;
+}
+
+.loading-animation .obj:nth-child(2) {
+	animation-delay: 0.15s;
+}
+.loading-animation .obj:nth-child(3) {
+	animation-delay: 0.3s;
+}
+.loading-animation .obj:nth-child(4) {
+	animation-delay: 0.45s;
+}
+.loading-animation .obj:nth-child(5) {
+	animation-delay: 0.6s;
+}
+.loading-animation .obj:nth-child(6) {
+	animation-delay: 0.75s;
+}
+.loading-animation .obj:nth-child(7) {
+	animation-delay: 0.9s;
+}
+.loading-animation .obj:nth-child(8) {
+	animation-delay: 1.05s;
+}
+
+@keyframes loading {
+	0% {
+		height: 0;
+	}
+	50% {
+		height: 50px;
+	}
+	100% {
+		height: 0;
+	}
+}
+
+/* loading-container style end  */
+
+/* media query start  */
+@media screen and (max-width: 930px) {
+	.homepage-container .left {
+		margin-right: 0px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.homepage-container .right {
+		width: 100%;
+	}
+}
