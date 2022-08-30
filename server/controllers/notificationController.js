@@ -10,7 +10,21 @@ const getNotifications = async (req, res) => {
 			const notifications = await notificationModel.findOne({
 				id: "administrator"
 			});
-			if (notifications) {
+
+			const notificationsGroup = await notificationModel.find({
+				for_admin: true
+			});
+
+			if (notificationsGroup) {
+				const initial = notifications ? notifications.notification : [];
+
+				let notificationArray;
+				notificationsGroup.map((value) => {
+					notificationArray = initial.concat(value.notification);
+				});
+
+				res.status(200).json(notificationArray);
+			} else if (notifications) {
 				res.status(200).json(notifications.notification);
 			}
 		} else if (req.currentUser.role === "advisor") {
@@ -22,9 +36,32 @@ const getNotifications = async (req, res) => {
 				id: `advisor-${req.currentUser._id}`
 			});
 
-			if (notifications && notificationsGroup) {
+			const notificationsGroupAd = await notificationModel.findOne({
+				id: `administrator-${req.currentUser._id}`
+			});
+
+			if (notifications && notificationsGroup && notificationsGroupAd) {
+				const notificationArray = notifications.notification.concat(
+					notificationsGroup.notification,
+					notificationsGroupAd.notification
+				);
+
+				res.status(200).json(notificationArray);
+			} else if (notifications && notificationsGroup) {
 				const notificationArray = notifications.notification.concat(
 					notificationsGroup.notification
+				);
+
+				res.status(200).json(notificationArray);
+			} else if (notifications && notificationsGroupAd) {
+				const notificationArray = notifications.notification.concat(
+					notificationsGroupAd.notification
+				);
+
+				res.status(200).json(notificationArray);
+			} else if (notificationsGroup && notificationsGroupAd) {
+				const notificationArray = notificationsGroup.notification.concat(
+					notificationsGroupAd.notification
 				);
 
 				res.status(200).json(notificationArray);
@@ -40,9 +77,32 @@ const getNotifications = async (req, res) => {
 				id: `student-${req.currentUser.advisor._id}`
 			});
 
-			if (notifications && notificationsGroup) {
+			const notificationsGroupAd = await notificationModel.findOne({
+				id: `administrator-${req.currentUser.advisor._id}`
+			});
+
+			if (notifications && notificationsGroup && notificationsGroupAd) {
+				const notificationArray = notifications.notification.concat(
+					notificationsGroup.notification,
+					notificationsGroupAd.notification
+				);
+
+				res.status(200).json(notificationArray);
+			} else if (notifications && notificationsGroup) {
 				const notificationArray = notifications.notification.concat(
 					notificationsGroup.notification
+				);
+
+				res.status(200).json(notificationArray);
+			} else if (notifications && notificationsGroupAd) {
+				const notificationArray = notifications.notification.concat(
+					notificationsGroupAd.notification
+				);
+
+				res.status(200).json(notificationArray);
+			} else if (notificationsGroup && notificationsGroupAd) {
+				const notificationArray = notificationsGroup.notification.concat(
+					notificationsGroupAd.notification
 				);
 
 				res.status(200).json(notificationArray);
@@ -65,7 +125,8 @@ const createNotification = async (req, res) => {
 		text,
 		last_message,
 		time,
-		from_where
+		from_where,
+		for_admin
 	} = req.body;
 
 	try {
@@ -84,6 +145,8 @@ const createNotification = async (req, res) => {
 				from_where
 			});
 
+			document.for_admin = for_admin ? for_admin : false;
+
 			await document.save();
 			res.status(200).json({ message: "notification update successfully" });
 		} else {
@@ -96,8 +159,11 @@ const createNotification = async (req, res) => {
 				kind,
 				text,
 				last_message,
-				time
+				time,
+				from_where
 			});
+
+			createDocument.for_admin = for_admin ? for_admin : false;
 
 			await createDocument.save();
 			res.status(200).json({ message: "notification update successfully" });

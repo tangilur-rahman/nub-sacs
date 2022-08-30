@@ -99,7 +99,8 @@ const InputBox = ({
 				(currentUser.role === "advisor" &&
 					getMessages.room === currentUser._id) ||
 				(currentUser.role === "student" &&
-					getMessages.room === currentUser.advisor._id)
+					getMessages.room === currentUser.advisor._id) ||
+				currentUser.role === "administrator"
 			) {
 				setLatestGroup(socketMessage);
 			} else {
@@ -135,7 +136,8 @@ const InputBox = ({
 					(currentUser.role === "advisor" &&
 						getMessages.room === currentUser._id) ||
 					(currentUser.role === "student" &&
-						getMessages.room === currentUser.advisor._id)
+						getMessages.room === currentUser.advisor._id) ||
+					currentUser.role === "administrator"
 				)
 			) {
 				if (currentUser.role === "advisor") {
@@ -185,7 +187,8 @@ const InputBox = ({
 						last_message: `${currentUser.name} send a message in group.`,
 						isRead: false,
 						time: Date.now(),
-						from_where: getMessages._id
+						from_where: getMessages._id,
+						for_admin: true
 					};
 
 					mySocket?.emit("send_group_notification", {
@@ -201,6 +204,25 @@ const InputBox = ({
 						sender_profile: currentUser.profile_img,
 						kind: "message",
 						last_message: `${currentUser.name} send a message in group.`,
+						isRead: false,
+						time: Date.now(),
+						from_where: getMessages._id,
+						for_admin: true
+					};
+
+					mySocket?.emit("send_group_notification", {
+						notificationObject,
+						room: getMessages.room
+					});
+
+					setNotifiUpdate(notificationObject);
+				} else if (currentUser.role === "administrator") {
+					const notificationObject = {
+						id: `administrator-${getMessages.room}`,
+						sender_name: currentUser.name,
+						sender_profile: currentUser.profile_img,
+						kind: "message",
+						last_message: `Administrator send a message in group.`,
 						isRead: false,
 						time: Date.now(),
 						from_where: getMessages._id
@@ -224,7 +246,8 @@ const InputBox = ({
 					(currentUser.role === "advisor" &&
 						getMessages.room === currentUser._id) ||
 					(currentUser.role === "student" &&
-						getMessages.room === currentUser.advisor._id)
+						getMessages.room === currentUser.advisor._id) ||
+					currentUser.role === "administrator"
 				) {
 					const response = await fetch("/group-chat", {
 						method: "PUT",
@@ -320,7 +343,8 @@ const InputBox = ({
 						(currentUser.role === "advisor" &&
 							getMessages.room === currentUser._id) ||
 						(currentUser.role === "student" &&
-							getMessages.room === currentUser.advisor._id)
+							getMessages.room === currentUser.advisor._id) ||
+						currentUser.role === "administrator"
 					)
 				) {
 					if (currentUser.role === "advisor") {
@@ -370,7 +394,8 @@ const InputBox = ({
 							last_message: `${currentUser.name} send a message in group.`,
 							isRead: false,
 							time: Date.now(),
-							from_where: getMessages._id
+							from_where: getMessages._id,
+							for_admin: true
 						};
 
 						mySocket?.emit("send_group_notification", {
@@ -386,6 +411,25 @@ const InputBox = ({
 							sender_profile: currentUser.profile_img,
 							kind: "message",
 							last_message: `${currentUser.name} send a message in group.`,
+							isRead: false,
+							time: Date.now(),
+							from_where: getMessages._id,
+							for_admin: true
+						};
+
+						mySocket?.emit("send_group_notification", {
+							notificationObject,
+							room: getMessages.room
+						});
+
+						setNotifiUpdate(notificationObject);
+					} else if (currentUser.role === "administrator") {
+						const notificationObject = {
+							id: `administrator-${getMessages.room}`,
+							sender_name: currentUser.name,
+							sender_profile: currentUser.profile_img,
+							kind: "message",
+							last_message: `Administrator send a message in group.`,
 							isRead: false,
 							time: Date.now(),
 							from_where: getMessages._id
@@ -408,7 +452,8 @@ const InputBox = ({
 						(currentUser.role === "advisor" &&
 							getMessages.room === currentUser._id) ||
 						(currentUser.role === "student" &&
-							getMessages.room === currentUser.advisor._id)
+							getMessages.room === currentUser.advisor._id) ||
+						currentUser.role === "administrator"
 					) {
 						const response = await fetch("/group-chat", {
 							method: "PUT",
@@ -538,7 +583,8 @@ const InputBox = ({
 					(currentUser.role === "advisor" &&
 						getMessages.room === currentUser._id) ||
 					(currentUser.role === "student" &&
-						getMessages.room === currentUser.advisor._id)
+						getMessages.room === currentUser.advisor._id) ||
+					currentUser.role === "administrator"
 				)
 			) {
 				if (currentUser.role === "advisor") {
@@ -588,7 +634,8 @@ const InputBox = ({
 						last_message: `${currentUser.name} send a attachment in group.`,
 						isRead: false,
 						time: Date.now(),
-						from_where: getMessages._id
+						from_where: getMessages._id,
+						for_admin: true
 					};
 
 					mySocket?.emit("send_group_notification", {
@@ -604,6 +651,25 @@ const InputBox = ({
 						sender_profile: currentUser.profile_img,
 						kind: "message",
 						last_message: `${currentUser.name} send a attachment in group.`,
+						isRead: false,
+						time: Date.now(),
+						from_where: getMessages._id,
+						for_admin: true
+					};
+
+					mySocket?.emit("send_group_notification", {
+						notificationObject,
+						room: getMessages.room
+					});
+
+					setNotifiUpdate(notificationObject);
+				} else if (currentUser.role === "administrator") {
+					const notificationObject = {
+						id: `administrator-${getMessages.room}`,
+						sender_name: currentUser.name,
+						sender_profile: currentUser.profile_img,
+						kind: "message",
+						last_message: `Administrator send a attachment in group.`,
 						isRead: false,
 						time: Date.now(),
 						from_where: getMessages._id

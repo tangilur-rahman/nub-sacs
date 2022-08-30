@@ -22,7 +22,11 @@ const schema = mongoose.Schema({
 
 			from_where: String
 		}
-	]
+	],
+	for_admin: {
+		type: Boolean,
+		default: false
+	}
 });
 
 const notificationModel = mongoose.model("notification", schema);
