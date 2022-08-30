@@ -154,6 +154,10 @@ const Header = ({ getMessages, setReloadGroup }) => {
 						? `/uploads/profile-img/${getMessages?.group_img}`
 						: ""
 				);
+			} else if (currentUser.role === "administrator") {
+				setGroupName(getMessages.group_name);
+
+				setPreviewImg(`/uploads/profile-img/${getMessages?.group_img}`);
 			}
 
 			// get all group members
@@ -165,6 +169,8 @@ const Header = ({ getMessages, setReloadGroup }) => {
 						room = currentUser._id;
 					} else if (currentUser.role === "student") {
 						room = currentUser.advisor._id;
+					} else if (currentUser.role === "administrator") {
+						room = getMessages.room;
 					}
 
 					const response = await fetch(`/group-chat/members/${room}`);
@@ -270,7 +276,8 @@ const Header = ({ getMessages, setReloadGroup }) => {
 					{(currentUser.role === "advisor" &&
 						getMessages.room === currentUser._id) ||
 					(currentUser.role === "student" &&
-						getMessages.room === currentUser.advisor._id) ? (
+						getMessages.room === currentUser.advisor._id) ||
+					currentUser.role === "administrator" ? (
 						<img src={previewImg} alt="profile-img" className="img-fluid" />
 					) : currentUser.role === "advisor" ? (
 						<img
@@ -291,7 +298,8 @@ const Header = ({ getMessages, setReloadGroup }) => {
 					{(currentUser.role === "advisor" &&
 						getMessages.room === currentUser._id) ||
 					(currentUser.role === "student" &&
-						getMessages.room === currentUser.advisor._id) ? (
+						getMessages.room === currentUser.advisor._id) ||
+					currentUser.role === "administrator" ? (
 						<h6>{groupName}</h6>
 					) : currentUser.role === "advisor" ? (
 						<h6>{getMessages.student.name}</h6>
@@ -314,7 +322,8 @@ const Header = ({ getMessages, setReloadGroup }) => {
 								((currentUser.role === "advisor" &&
 									getMessages.room === currentUser._id) ||
 									(currentUser.role === "student" &&
-										getMessages.room === currentUser.advisor._id)) && (
+										getMessages.room === currentUser.advisor._id) ||
+									currentUser.role === "administrator") && (
 									<li
 										onClick={() => {
 											setViewGroup("group");
@@ -386,7 +395,8 @@ const Header = ({ getMessages, setReloadGroup }) => {
 																getMessages.room === currentUser._id) ||
 																(currentUser.role === "student" &&
 																	getMessages.room ===
-																		currentUser.advisor._id)) &&
+																		currentUser.advisor._id) ||
+																currentUser.role === "administrator") &&
 																`/uploads/profile-img/${getMessages.group_img}`
 														);
 													}}

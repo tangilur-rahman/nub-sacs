@@ -118,14 +118,14 @@ const UserBox = ({
 									key={index}
 								>
 									<img
-										src={`/uploads/profile-img/${value.profile_img}`}
+										src={`/uploads/profile-img/${value.group_img}`}
 										alt="profile-img"
 										className="profile-img img-fluid"
 									/>
 
 									<section>
 										<div className="above">
-											<h6>{value.name}</h6>
+											<h6>{value.group_name}</h6>
 
 											<span>
 												{value?.messages.slice(-1)[0]?.time && (
