@@ -402,8 +402,10 @@ const Navbar = ({
 										<NotificationBadge
 											count={
 												messageN &&
-												messageN.filter((value) => value.isRead === false)
-													?.length
+												(currentUser.role === "administrator"
+													? 0
+													: messageN.filter((value) => value.isRead === false)
+															?.length)
 											}
 											effect={Effect.SCALE}
 											className="notification-count"

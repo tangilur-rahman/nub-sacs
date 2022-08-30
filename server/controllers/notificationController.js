@@ -205,6 +205,17 @@ const makeAllRead = async (req, res) => {
 				groupNotification.save();
 			}
 
+			const groupNotificationAdmin = await notificationModel.findOne({
+				id: `administrator-${req.currentUser._id}`
+			});
+
+			if (groupNotificationAdmin) {
+				groupNotificationAdmin.notification.map(
+					(value) => (value.isRead = true)
+				);
+				groupNotificationAdmin.save();
+			}
+
 			res.status(200).json({ message: "successfully update" });
 		} else if (req.currentUser.role === "student") {
 			const document = await notificationModel.findOne({
@@ -223,6 +234,17 @@ const makeAllRead = async (req, res) => {
 			if (groupNotification) {
 				groupNotification.notification.map((value) => (value.isRead = true));
 				groupNotification.save();
+			}
+
+			const groupNotificationAdmin = await notificationModel.findOne({
+				id: `administrator-${req.currentUser.advisor._id}`
+			});
+
+			if (groupNotificationAdmin) {
+				groupNotificationAdmin.notification.map(
+					(value) => (value.isRead = true)
+				);
+				groupNotificationAdmin.save();
 			}
 
 			res.status(200).json({ message: "successfully update" });
@@ -277,6 +299,19 @@ const makeRead = async (req, res) => {
 				groupNotification.save();
 			}
 
+			const groupNotificationAdmin = await notificationModel.findOne({
+				id: `administrator-${req.currentUser._id}`
+			});
+
+			if (groupNotificationAdmin) {
+				groupNotificationAdmin.notification.map((value) => {
+					if (value.from_where === req.params._id) {
+						value.isRead = true;
+					}
+				});
+				groupNotificationAdmin.save();
+			}
+
 			res.status(200).json({ message: "successfully update" });
 		} else if (req.currentUser.role === "student") {
 			const document = await notificationModel.findOne({
@@ -305,6 +340,19 @@ const makeRead = async (req, res) => {
 				});
 
 				groupNotification.save();
+			}
+
+			const groupNotificationAdmin = await notificationModel.findOne({
+				id: `administrator-${req.currentUser.advisor._id}`
+			});
+
+			if (groupNotificationAdmin) {
+				groupNotificationAdmin.notification.map((value) => {
+					if (value.from_where === req.params._id) {
+						value.isRead = true;
+					}
+				});
+				groupNotificationAdmin.save();
 			}
 
 			res.status(200).json({ message: "successfully update" });
