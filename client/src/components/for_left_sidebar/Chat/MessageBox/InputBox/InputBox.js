@@ -700,7 +700,8 @@ const InputBox = ({
 					(currentUser.role === "advisor" &&
 						getMessages.room === currentUser._id) ||
 					(currentUser.role === "student" &&
-						getMessages.room === currentUser.advisor._id)
+						getMessages.room === currentUser.advisor._id) ||
+					currentUser.role === "administrator"
 				) {
 					const response = await fetch("/group-chat/file", {
 						method: "PUT",

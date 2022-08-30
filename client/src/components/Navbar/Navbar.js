@@ -589,7 +589,7 @@ const Navbar = ({
 													setLogoutT(false);
 												}}
 											>
-												<i>🧑‍🏫</i>
+												<i>👨‍💼</i>
 												<span>
 													{totalAdvisors > 1 ? "Advisors" : "Advisor"}
 													<h6>{totalAdvisors}</h6>
@@ -605,7 +605,7 @@ const Navbar = ({
 													setLogoutT(false);
 												}}
 											>
-												<i>🧑</i>
+												<i>👨‍🎓</i>
 												<span>
 													{totalStudents > 1 ? "Students" : "Student"}
 													<h6>{totalStudents}</h6>

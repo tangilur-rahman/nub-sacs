@@ -165,10 +165,15 @@ const MessageBox = ({
 	useEffect(() => {
 		if (getMessages) {
 			const messageArray = getMessages.messages;
-
 			const attachmentArray = getMessages.attachments;
 
-			setDisplayMessages(messageArray.concat(attachmentArray));
+			if (messageArray && attachmentArray) {
+				setDisplayMessages(messageArray.concat(attachmentArray));
+			} else if (messageArray) {
+				setDisplayMessages(messageArray);
+			} else if (attachmentArray) {
+				setDisplayMessages(attachmentArray);
+			}
 		}
 	}, [getMessages]);
 
