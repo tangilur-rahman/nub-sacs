@@ -16,14 +16,13 @@ const getNotifications = async (req, res) => {
 			});
 
 			if (notificationsGroup) {
-				const initial = notifications ? notifications.notification : [];
+				let initial = notifications ? notifications.notification : [];
 
-				let notificationArray;
 				notificationsGroup.map((value) => {
-					notificationArray = initial.concat(value.notification);
+					initial = initial.concat(value.notification);
 				});
 
-				res.status(200).json(notificationArray);
+				res.status(200).json(initial);
 			} else if (notifications) {
 				res.status(200).json(notifications.notification);
 			}
