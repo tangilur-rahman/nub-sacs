@@ -10,7 +10,9 @@ const createOrGet = async (req, res) => {
 	try {
 		if (req.currentUser.role === "administrator") {
 			const findGroups = await groupModel.find({});
-			res.status(200).json(findGroups);
+			if (findGroups) {
+				res.status(200).json(findGroups);
+			}
 		} else if (req.currentUser.role === "advisor") {
 			const findGroup = await groupModel.findOne({ room: req.currentUser._id });
 

@@ -30,6 +30,7 @@ const Chat = ({ messageId }) => {
 
 	// for get or create group-chat start
 	const [getGroup, setGroup] = useState("");
+	const [getGroupArray, setGroupArray] = useState("");
 
 	// for refetching group again when group edit
 	const [reloadGroup, setReloadGroup] = useState("");
@@ -41,7 +42,11 @@ const Chat = ({ messageId }) => {
 			const result = await response.json();
 
 			if (response.status === 200) {
-				setGroup(result);
+				if (currentUser.role === "administrator") {
+					setGroupArray(result ? result : "");
+				} else {
+					setGroup(result ? result : "");
+				}
 			} else if (result.error) {
 				toast.error(result.error, {
 					position: "top-right",
@@ -60,10 +65,10 @@ const Chat = ({ messageId }) => {
 
 	useEffect(() => {
 		if (currentUser) {
-			currentUser.role !== "administrator" && getGroupChat();
+			getGroupChat();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [reloadGroup]);
+	}, [reloadGroup, getMessages, currentUser]);
 	// for get or create group-chat end
 
 	// for get or create personal-chat start
@@ -206,7 +211,7 @@ const Chat = ({ messageId }) => {
 			<div className="group-chat-container">
 				<div className="row m-0">
 					<div className="col-5 p-0">
-						{isLoading || !(getGroup && getPersonal) ? (
+						{isLoading || !(getGroupArray || (getGroup && getPersonal)) ? (
 							<ChatBoxSkeleton />
 						) : (
 							<UserBox
@@ -222,6 +227,7 @@ const Chat = ({ messageId }) => {
 								setSearchUser={setSearchUser}
 								searchUser={searchUser}
 								setSelectedSearch={setSelectedSearch}
+								getGroupArray={getGroupArray}
 							/>
 						)}
 					</div>

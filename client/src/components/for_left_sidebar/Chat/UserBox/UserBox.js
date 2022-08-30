@@ -19,14 +19,17 @@ const UserBox = ({
 	setSearch,
 	searchUser,
 	setSearchUser,
-	setSelectedSearch
+	setSelectedSearch,
+	getGroupArray
 }) => {
 	// get current user
 	const { currentUser } = GetContextApi();
 
 	// insert initial latest message & time
 	useEffect(() => {
-		setLatestGroup(getGroup?.messages.slice(-1)[0]);
+		if (currentUser.role !== "administrator") {
+			setLatestGroup(getGroup?.messages.slice(-1)[0]);
+		}
 
 		if (currentUser?.role === "student") {
 			setLatestPersonal(getPersonal?.messages.slice(-1)[0]);
@@ -77,28 +80,70 @@ const UserBox = ({
 					id={currentUser?.role === "student" ? "student" : ""}
 				>
 					{/* for group-chat start  */}
-					<div className="user" onClick={() => setMessages(getGroup)}>
-						<img
-							src={`/uploads/profile-img/${getGroup?.group_img}`}
-							alt="profile-img"
-							className="profile-img img-fluid"
-						/>
+					{currentUser.role !== "administrator" && (
+						<div className="user" onClick={() => setMessages(getGroup)}>
+							<img
+								src={`/uploads/profile-img/${getGroup?.group_img}`}
+								alt="profile-img"
+								className="profile-img img-fluid"
+							/>
 
-						<section>
-							<div className="above">
-								<h6>{getGroup?.group_name}</h6>
+							<section>
+								<div className="above">
+									<h6>{getGroup?.group_name}</h6>
 
-								<span>
-									{latestGroup?.time && (
-										<TimeAgo datetime={latestGroup?.time} />
-									)}
-								</span>
-							</div>
+									<span>
+										{latestGroup?.time && (
+											<TimeAgo datetime={latestGroup?.time} />
+										)}
+									</span>
+								</div>
 
-							<div className="down">{latestGroup?.message}</div>
-						</section>
-					</div>
+								<div className="down">{latestGroup?.message}</div>
+							</section>
+						</div>
+					)}
 					{/* for group-chat end  */}
+
+					{/* for group-chat for administrator start  */}
+					{currentUser?.role === "administrator" &&
+						sortArray(getGroupArray, {
+							by: "updatedAt",
+							order: "desc"
+						})?.map((value, index) => {
+							return (
+								<div
+									className="user"
+									onClick={() => setMessages(value)}
+									key={index}
+								>
+									<img
+										src={`/uploads/profile-img/${value.profile_img}`}
+										alt="profile-img"
+										className="profile-img img-fluid"
+									/>
+
+									<section>
+										<div className="above">
+											<h6>{value.name}</h6>
+
+											<span>
+												{value?.messages.slice(-1)[0]?.time && (
+													<TimeAgo
+														datetime={value?.messages.slice(-1)[0]?.time}
+													/>
+												)}
+											</span>
+										</div>
+
+										<div className="down">
+											{value?.messages.slice(-1)[0]?.message}
+										</div>
+									</section>
+								</div>
+							);
+						})}
+					{/* for group-chat for administrator end  */}
 
 					{/* for personal-chat start  */}
 					{/* when student start  */}
@@ -128,7 +173,7 @@ const UserBox = ({
 					{/* when student end  */}
 
 					{/* when advisor start */}
-					{currentUser?.role !== "student" &&
+					{currentUser?.role === "advisor" &&
 						sortArray(getPersonal, {
 							by: "updatedAt",
 							order: "desc"
@@ -170,7 +215,7 @@ const UserBox = ({
 					{/* for personal-chat end  */}
 
 					{/* for search students start  */}
-					{currentUser?.role !== "student" && (
+					{currentUser?.role === "advisor" && (
 						<div id="search-box" ref={myRef}>
 							{searchUser &&
 								searchUser.map((value, index) => {
