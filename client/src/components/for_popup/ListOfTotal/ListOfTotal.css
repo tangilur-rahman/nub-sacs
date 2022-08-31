@@ -86,8 +86,7 @@
 .total-wrapper .table-container {
 	min-height: fit-content;
 	max-height: 77vh;
-	overflow-y: auto;
-	overflow-x: hidden;
+	overflow: auto;
 	padding: 0 15px;
 }
 

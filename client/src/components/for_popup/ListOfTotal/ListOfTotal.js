@@ -272,7 +272,7 @@ const ListOfTotal = ({ totalValue, setTotalValue, setUserEdit }) => {
 												</>
 											)}
 
-											<th scope="col">Update Date</th>
+											<th scope="col">Update_date</th>
 										</tr>
 									</thead>
 
