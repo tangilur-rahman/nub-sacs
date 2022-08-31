@@ -1,0 +1,5 @@
+@media screen and (max-width: 768px) {
+	.chat-container #message-box {
+		height: 90vh;
+	}
+}

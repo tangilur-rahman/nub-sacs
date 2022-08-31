@@ -319,3 +319,10 @@
 }
 
 /* file review style end  */
+
+/* media query start  */
+@media screen and (max-width: 600px) {
+	.message-box .input-box-container {
+		padding: 5px 0px 10px 3px;
+	}
+}

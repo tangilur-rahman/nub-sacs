@@ -8,10 +8,15 @@ import ChatBoxSkeleton from "../../Skeleton/ChatBoxSkeleton/ChatBoxSkeleton";
 import "./Chat.css";
 import MessageBox from "./MessageBox/MessageBox";
 import UserBox from "./UserBox/UserBox";
+import { Viewport } from "./Viewport";
 
 const Chat = ({ messageId }) => {
 	// for get current user
-	const { currentUser } = GetContextApi();
+	const { currentUser, setHideMenu } = GetContextApi();
+
+	// for user-box & message-box toggle
+	const [chatT, setChatT] = useState(false);
+	const isMobile = Viewport("(max-width:768px)", true);
 
 	// check fetching complete or not from server
 	const [isLoading, setIsLoading] = useState(true);
@@ -206,40 +211,96 @@ const Chat = ({ messageId }) => {
 	}, [search, getMessages]);
 	// for get or create personal-chat end
 
+	// for user-box & message-box toggle start
+	useEffect(() => {
+		if (getMessages) {
+			setChatT(true);
+			setHideMenu(true);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [getMessages]);
+	// for user-box & message-box toggle end
+
 	return (
 		<>
-			<div className="group-chat-container">
+			<div className="chat-container">
 				<div className="row m-0">
-					<div className="col-5 p-0">
-						{isLoading || !(getGroupArray || (getGroup && getPersonal)) ? (
-							<ChatBoxSkeleton />
+					<div className="col-md-5 col-12 p-0">
+						{isMobile ? (
+							!chatT && (
+								<>
+									{isLoading ||
+									!(getGroupArray || (getGroup && getPersonal)) ? (
+										<ChatBoxSkeleton />
+									) : (
+										<UserBox
+											getGroup={getGroup}
+											getPersonal={getPersonal}
+											setMessages={setMessages}
+											latestGroup={latestGroup}
+											setLatestGroup={setLatestGroup}
+											latestPersonal={latestPersonal}
+											setLatestPersonal={setLatestPersonal}
+											search={search}
+											setSearch={setSearch}
+											setSearchUser={setSearchUser}
+											searchUser={searchUser}
+											setSelectedSearch={setSelectedSearch}
+											getGroupArray={getGroupArray}
+										/>
+									)}
+								</>
+							)
 						) : (
-							<UserBox
-								getGroup={getGroup}
-								getPersonal={getPersonal}
-								setMessages={setMessages}
-								latestGroup={latestGroup}
-								setLatestGroup={setLatestGroup}
-								latestPersonal={latestPersonal}
-								setLatestPersonal={setLatestPersonal}
-								search={search}
-								setSearch={setSearch}
-								setSearchUser={setSearchUser}
-								searchUser={searchUser}
-								setSelectedSearch={setSelectedSearch}
-								getGroupArray={getGroupArray}
-							/>
+							<>
+								{isLoading || !(getGroupArray || (getGroup && getPersonal)) ? (
+									<ChatBoxSkeleton />
+								) : (
+									<UserBox
+										getGroup={getGroup}
+										getPersonal={getPersonal}
+										setMessages={setMessages}
+										latestGroup={latestGroup}
+										setLatestGroup={setLatestGroup}
+										latestPersonal={latestPersonal}
+										setLatestPersonal={setLatestPersonal}
+										search={search}
+										setSearch={setSearch}
+										setSearchUser={setSearchUser}
+										searchUser={searchUser}
+										setSelectedSearch={setSelectedSearch}
+										getGroupArray={getGroupArray}
+									/>
+								)}
+							</>
 						)}
 					</div>
-					<div className="col-7 p-0">
-						<MessageBox
-							getMessages={getMessages}
-							setMessages={setMessages}
-							setLatestGroup={setLatestGroup}
-							setLatestPersonal={setLatestPersonal}
-							setReloadGroup={setReloadGroup}
-							messageId={messageId}
-						/>
+					<div className="col-md-7 col-12 p-0" id="message-box">
+						{isMobile ? (
+							chatT && (
+								<>
+									<MessageBox
+										getMessages={getMessages}
+										setMessages={setMessages}
+										setLatestGroup={setLatestGroup}
+										setLatestPersonal={setLatestPersonal}
+										setReloadGroup={setReloadGroup}
+										messageId={messageId}
+										setChatT={setChatT}
+										isMobile={isMobile}
+									/>
+								</>
+							)
+						) : (
+							<MessageBox
+								getMessages={getMessages}
+								setMessages={setMessages}
+								setLatestGroup={setLatestGroup}
+								setLatestPersonal={setLatestPersonal}
+								setReloadGroup={setReloadGroup}
+								messageId={messageId}
+							/>
+						)}
 					</div>
 				</div>
 			</div>

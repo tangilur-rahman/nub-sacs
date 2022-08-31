@@ -13,7 +13,8 @@ const InputBox = ({
 	displayMessages,
 	setDisplayMessages,
 	setLatestGroup,
-	setLatestPersonal
+	setLatestPersonal,
+	isMobile
 }) => {
 	// for get current-user
 	const { currentUser, mySocket, setNotifiUpdate } = GetContextApi();
@@ -813,7 +814,7 @@ const InputBox = ({
 					<div className="input-box">
 						<TextareaAutosize
 							autoFocus
-							placeholder="Type a message..."
+							placeholder={isMobile ? "message..." : "Type a message..."}
 							id="text-area"
 							onChange={(event) => setInputText(event.target.value)}
 							onFocus={() => setEmojiToggle(false)}
@@ -857,7 +858,7 @@ const InputBox = ({
 					<div className="input-box">
 						<TextareaAutosize
 							autoFocus
-							placeholder="Type a message..."
+							placeholder={isMobile ? "message..." : "Type a message..."}
 							id="text-area"
 							onChange={(event) => setAttachText(event.target.value)}
 							onFocus={() => setEmojiToggle(false)}

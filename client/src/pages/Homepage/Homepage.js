@@ -26,7 +26,8 @@ const Homepage = ({
 	setAppDisplay,
 	setMessageId
 }) => {
-	const { currentUser, setCurrentUser, isSubmitted } = GetContextApi();
+	const { currentUser, setCurrentUser, isSubmitted, hideMenu } =
+		GetContextApi();
 
 	// for redirect login-page
 	const Navigate = useNavigate();
@@ -125,17 +126,19 @@ const Homepage = ({
 				</div>
 			) : (
 				<>
-					<Navbar
-						currentUser={currentUser}
-						registerT={registerT}
-						setRegisterT={setRegisterT}
-						setTotalValue={setTotalValue}
-						setProfileT={setProfileT}
-						created={created}
-						setAppDisplay={setAppDisplay}
-						setMessageId={setMessageId}
-						setSelected={setSelected}
-					/>
+					{!hideMenu && (
+						<Navbar
+							currentUser={currentUser}
+							registerT={registerT}
+							setRegisterT={setRegisterT}
+							setTotalValue={setTotalValue}
+							setProfileT={setProfileT}
+							created={created}
+							setAppDisplay={setAppDisplay}
+							setMessageId={setMessageId}
+							setSelected={setSelected}
+						/>
+					)}
 
 					<div className="container-fluid p-0 homepage-main-container">
 						<div
@@ -207,16 +210,18 @@ const Homepage = ({
 						<ToastContainer />
 
 						{/* for menu button start  */}
-						<div
-							className="menu-icon"
-							id={menuT ? "outline-color" : ""}
-							ref={myRef}
-						>
-							<i
-								className="fa-solid fa-bars"
-								onClick={() => setMenuT(!menuT)}
-							></i>
-						</div>
+						{!hideMenu && (
+							<div
+								className="menu-icon"
+								id={menuT ? "outline-color" : ""}
+								ref={myRef}
+							>
+								<i
+									className="fa-solid fa-bars"
+									onClick={() => setMenuT(!menuT)}
+								></i>
+							</div>
+						)}
 
 						{/* for menu button end  */}
 					</div>

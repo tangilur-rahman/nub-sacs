@@ -27,6 +27,9 @@ const ContextHandler = ({ children }) => {
 	// for notification count update from massage-box
 	const [updateCount, setUpdateCount] = useState("");
 
+	// when message-box visible => menubar hidden
+	const [hideMenu, setHideMenu] = useState("");
+
 	return (
 		<>
 			<rootContext.Provider
@@ -41,7 +44,9 @@ const ContextHandler = ({ children }) => {
 					notifiUpdateAdmin,
 					setNotifiUpdateAdmin,
 					updateCount,
-					setUpdateCount
+					setUpdateCount,
+					hideMenu,
+					setHideMenu
 				}}
 			>
 				{children}

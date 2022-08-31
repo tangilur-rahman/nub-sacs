@@ -376,3 +376,9 @@
 /* view-attachment-container end  */
 
 /* view-container end  */
+
+/* back-arrow style start */
+.header-container .back-arrow {
+	padding-left: 15px;
+}
+/* back-arrow style end */

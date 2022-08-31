@@ -7,9 +7,15 @@ import { useEffect, useRef, useState } from "react";
 import { GetContextApi } from "../../../../../ContextApi";
 import "./Header.css";
 
-const Header = ({ getMessages, setReloadGroup }) => {
+const Header = ({
+	getMessages,
+	setMessages,
+	setReloadGroup,
+	setChatT,
+	isMobile
+}) => {
 	// get current user
-	const { currentUser } = GetContextApi();
+	const { currentUser, setHideMenu } = GetContextApi();
 
 	// for dropdown
 	const [dropdownT, setDropdownT] = useState("");
@@ -271,6 +277,19 @@ const Header = ({ getMessages, setReloadGroup }) => {
 	return (
 		<>
 			<div className="header-container">
+				{isMobile && (
+					<span className="back-arrow">
+						<i
+							class="fa-solid fa-arrow-left"
+							onClick={() => {
+								setMessages("");
+								setHideMenu(false);
+								setChatT(false);
+							}}
+						></i>
+					</span>
+				)}
+
 				<div className="selected-user">
 					{/* header img start  */}
 					{(currentUser.role === "advisor" &&

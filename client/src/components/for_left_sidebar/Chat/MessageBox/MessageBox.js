@@ -15,7 +15,9 @@ const MessageBox = ({
 	setLatestGroup,
 	setLatestPersonal,
 	setReloadGroup,
-	messageId
+	messageId,
+	setChatT,
+	isMobile
 }) => {
 	// for get current-user
 	const { currentUser, setUpdateCount } = GetContextApi();
@@ -182,7 +184,13 @@ const MessageBox = ({
 			{getMessages ? (
 				<div className="message-box">
 					{getMessages && (
-						<Header getMessages={getMessages} setReloadGroup={setReloadGroup} />
+						<Header
+							getMessages={getMessages}
+							setReloadGroup={setReloadGroup}
+							setChatT={setChatT}
+							isMobile={isMobile}
+							setMessages={setMessages}
+						/>
 					)}
 
 					<ChatBox
@@ -197,6 +205,7 @@ const MessageBox = ({
 							setDisplayMessages={setDisplayMessages}
 							setLatestGroup={setLatestGroup}
 							setLatestPersonal={setLatestPersonal}
+							isMobile={isMobile}
 						/>
 					)}
 				</div>
