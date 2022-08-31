@@ -4,7 +4,7 @@
 import "./LeftSidebar.css";
 import TabContainer from "./TabContainer/TabContainer";
 
-const LeftSidebar = ({ currentUser, selected, setSelected }) => {
+const LeftSidebar = ({ currentUser, selected, setSelected, menuT, myRef }) => {
 	return (
 		<>
 			<div className="current-user d-none d-lg-flex">
@@ -21,7 +21,11 @@ const LeftSidebar = ({ currentUser, selected, setSelected }) => {
 				</div>
 			</div>
 
-			<div className="tab-container">
+			<div
+				className="tab-container"
+				ref={myRef}
+				id={menuT ? "active" : "inactive"}
+			>
 				<TabContainer
 					selected={selected}
 					setSelected={setSelected}

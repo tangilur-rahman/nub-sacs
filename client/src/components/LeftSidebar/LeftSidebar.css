@@ -92,3 +92,50 @@
 	margin: 0 0 0 2rem;
 	opacity: 0.8;
 }
+
+/* media query start  */
+@media screen and (max-width: 992px) {
+	.left .tab-container {
+		position: absolute;
+		top: 40px;
+		left: 0;
+		z-index: 9999;
+		width: max-content;
+	}
+
+	.left .tab-container#active {
+		animation: Opening 0.5s linear forwards;
+	}
+
+	.left .tab-container#inactive {
+		animation: Closing 0.5s linear forwards;
+	}
+
+	@keyframes Opening {
+		0% {
+			width: 0;
+		}
+
+		100% {
+			width: 200px;
+		}
+	}
+
+	@keyframes Closing {
+		0% {
+			width: 200px;
+		}
+
+		100% {
+			width: 0;
+		}
+	}
+
+	.left .tab-container span {
+		display: flex;
+		padding: 20.5px 10px 20.5px 0;
+		align-items: center;
+		cursor: pointer;
+		position: relative;
+	}
+}

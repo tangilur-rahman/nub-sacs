@@ -85,7 +85,31 @@
 
 /* loading-container style end  */
 
+.homepage-main-container .menu-icon {
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	font-size: 30px;
+	color: #cce3de;
+	padding: 0 10px;
+	outline: 4px solid #cce3de;
+	box-shadow: var(--box-shadow);
+	border-radius: 50%;
+	display: none;
+	cursor: pointer;
+}
+
+.homepage-main-container .menu-icon#outline-color {
+	outline: 4px solid #06d6a0;
+}
+
 /* media query start  */
+@media screen and (max-width: 992px) {
+	.homepage-main-container .menu-icon {
+		display: inline-block;
+	}
+}
+
 @media screen and (max-width: 930px) {
 	.homepage-container .left {
 		margin-right: 0px;

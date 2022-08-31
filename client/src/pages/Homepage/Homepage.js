@@ -1,5 +1,5 @@
 // external components
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 // react-toastify
@@ -38,6 +38,9 @@ const Homepage = ({
 	const [registerT, setRegisterT] = useState(false);
 	const [totalValue, setTotalValue] = useState("");
 	const [profileT, setProfileT] = useState(false);
+
+	// for menu-bar toggle
+	const [menuT, setMenuT] = useState(true);
 
 	// for edit user by administrator
 	const [userEdit, setUserEdit] = useState(false);
@@ -91,6 +94,22 @@ const Homepage = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selected]);
 
+	// for outside-click close menu-bar start
+	const myRef = useRef();
+
+	const handleClickOutside = (e) => {
+		if (!myRef.current?.contains(e.target)) {
+			setMenuT(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+	// for outside-click close menu-bar end
+
 	return (
 		<>
 			{isLoading ? (
@@ -138,6 +157,8 @@ const Homepage = ({
 											currentUser={currentUser}
 											selected={selected}
 											setSelected={setSelected}
+											menuT={menuT}
+											myRef={myRef}
 										/>
 									</div>
 
@@ -184,6 +205,20 @@ const Homepage = ({
 						{profileT === "logout" && <Logout />}
 
 						<ToastContainer />
+
+						{/* for menu button start  */}
+						<div
+							className="menu-icon"
+							id={menuT ? "outline-color" : ""}
+							ref={myRef}
+						>
+							<i
+								className="fa-solid fa-bars"
+								onClick={() => setMenuT(!menuT)}
+							></i>
+						</div>
+
+						{/* for menu button end  */}
 					</div>
 				</>
 			)}
