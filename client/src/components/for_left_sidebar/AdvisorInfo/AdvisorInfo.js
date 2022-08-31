@@ -10,6 +10,9 @@ const AdvisorInfo = () => {
 	// for get currentUser
 	const { currentUser } = GetContextApi();
 
+	// for checking loading complete or not
+	const [isLoading, setIsLoading] = useState(true);
+
 	// get my advisor
 	const [getAdvisor, setAdvisor] = useState("");
 
@@ -21,6 +24,7 @@ const AdvisorInfo = () => {
 
 			if (response.status === 200) {
 				setAdvisor(result);
+				setIsLoading(false);
 			} else if (response.status === 400) {
 				toast(result.message, {
 					position: "top-right",
@@ -51,76 +55,89 @@ const AdvisorInfo = () => {
 
 	return (
 		<>
-			<div className="advisor-info-container">
-				<div className="row m-0 layout">
-					<div className="col-12 p-0">
-						<div className="wrapper">
-							<div className="advisor-profile">
-								<span className="img-wrapper">
-									<img
-										src={`uploads/profile-img/${getAdvisor?.profile_img}`}
-										alt="profile-img"
-										className="img-fluid animation"
-									/>
-								</span>
-							</div>
-							<div className="advisor-info">
-								<div className="row info m-0">
-									<span id="name">
-										Name : <input value={getAdvisor?.name} readOnly />
-									</span>
-									<span>
-										ID :
-										<input
-											value={getAdvisor?.id}
-											readOnly
-											style={{ "max-width": "170px" }}
+			{isLoading ? (
+				<div className="loading-animation">
+					<div className="obj"></div>
+					<div className="obj"></div>
+					<div className="obj"></div>
+					<div className="obj"></div>
+					<div className="obj"></div>
+					<div className="obj"></div>
+					<div className="obj"></div>
+					<div className="obj"></div>
+				</div>
+			) : (
+				<div className="advisor-info-container">
+					<div className="row m-0 layout">
+						<div className="col-12 p-0">
+							<div className="wrapper">
+								<div className="advisor-profile">
+									<span className="img-wrapper">
+										<img
+											src={`uploads/profile-img/${getAdvisor?.profile_img}`}
+											alt="profile-img"
+											className="img-fluid animation"
 										/>
 									</span>
-									<span id="email">
-										Email : <input value={getAdvisor?.email} readOnly />
-									</span>
-									<span id="phone-number">
-										Phone :
-										{getAdvisor.phone ? (
-											<div style={{ display: "inline-block" }}>
-												<h6>+880</h6>
-												<input readOnly value={getAdvisor?.phone} />
-											</div>
-										) : (
-											<div
-												style={{
-													fontWeight: "600",
-													color: " #006d77",
-													display: "inline-block"
-												}}
-											>
-												&nbsp;&nbsp;Null
-											</div>
-										)}
-									</span>
-									<span>
-										Gender :
-										<input
-											value={getAdvisor?.gender}
-											readOnly
-											style={{ "max-width": "170px" }}
-										/>
-									</span>
-									<span>
-										Department :
-										<input
-											value={getAdvisor?.department}
-											readOnly
-											id="department"
-										/>
-									</span>
+								</div>
+								<div className="advisor-info">
+									<div className="row info m-0">
+										<span id="name">
+											Name : <input value={getAdvisor?.name} readOnly />
+										</span>
+										<span>
+											ID :
+											<input
+												value={getAdvisor?.id}
+												readOnly
+												style={{ "max-width": "170px" }}
+											/>
+										</span>
+										<span id="email">
+											Email : <input value={getAdvisor?.email} readOnly />
+										</span>
+										<span id="phone-number">
+											Phone :
+											{getAdvisor.phone ? (
+												<div style={{ display: "inline-block" }}>
+													<h6>+880</h6>
+													<input readOnly value={getAdvisor?.phone} />
+												</div>
+											) : (
+												<div
+													style={{
+														fontWeight: "600",
+														color: " #006d77",
+														display: "inline-block"
+													}}
+												>
+													&nbsp;&nbsp;Null
+												</div>
+											)}
+										</span>
+										<span>
+											Gender :
+											<input
+												value={getAdvisor?.gender}
+												readOnly
+												style={{ "max-width": "170px" }}
+											/>
+										</span>
+										<span>
+											Department :
+											<input
+												value={getAdvisor?.department}
+												readOnly
+												id="department"
+											/>
+										</span>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			)}
 		</>
 	);
 };
