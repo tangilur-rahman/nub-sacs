@@ -165,6 +165,14 @@
 }
 
 @media screen and (max-width: 550px) {
+	.c-appointment-container h5 {
+		margin-top: 10px;
+	}
+
+	.input-box .division {
+		margin: 7px 0;
+	}
+
 	.input-box .division td:first-child {
 		flex-basis: 28%;
 	}
