@@ -301,6 +301,10 @@
 	.appointment-summary .appointment-count {
 		padding: 7px 12px 0px 17px;
 	}
+
+	.appointment-list .header .btn {
+		margin: 0px 4px 0px 0px;
+	}
 }
 
 @media screen and (max-width: 550px) {
