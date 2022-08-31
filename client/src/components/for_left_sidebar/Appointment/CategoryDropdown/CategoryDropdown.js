@@ -4,7 +4,7 @@ import { useState } from "react";
 // internal components
 import "./CategoryDropdown.css";
 
-const CategoryDropdown = ({ getCateV, setCateV }) => {
+const CategoryDropdown = ({ getCateV, setCateV, isMobile }) => {
 	const [cateDropT, setCateDropT] = useState(false);
 
 	return (
@@ -17,7 +17,7 @@ const CategoryDropdown = ({ getCateV, setCateV }) => {
 			>
 				<input
 					type="text"
-					placeholder="Select Role"
+					placeholder={isMobile ? "Select Cate..." : "Select Category"}
 					id="category"
 					readOnly
 					value={getCateV}

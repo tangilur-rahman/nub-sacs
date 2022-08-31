@@ -1,6 +1,9 @@
-// external component
+// external components
 import { createContext, useContext, useEffect, useState } from "react";
 import io from "socket.io-client";
+
+// internal components
+import { Viewport } from "./components/Viewport";
 
 const rootContext = createContext(null);
 
@@ -30,6 +33,9 @@ const ContextHandler = ({ children }) => {
 	// when message-box visible => menubar hidden
 	const [hideMenu, setHideMenu] = useState("");
 
+	// for checking mobile view-port achieve or not
+	const isMobile = Viewport("(max-width:768px)", true);
+
 	return (
 		<>
 			<rootContext.Provider
@@ -46,7 +52,8 @@ const ContextHandler = ({ children }) => {
 					updateCount,
 					setUpdateCount,
 					hideMenu,
-					setHideMenu
+					setHideMenu,
+					isMobile
 				}}
 			>
 				{children}

@@ -17,22 +17,23 @@
 }
 
 .c-appointment-container .input-box {
-	padding: 20px 25px 10px;
+	padding: 10px 25px;
 }
 
 .input-box .division {
-	display: flex;
+	width: 100%;
+	display: inline-flex;
+	margin: 15px 0;
 }
 
-.input-box .division label {
+.input-box .division td:first-child {
 	flex-basis: 15%;
-	margin: 15px 0;
 	font-weight: 500;
 }
 
-.input-box .division .input-field {
+.input-box .division td:last-child {
 	flex-basis: 85%;
-	margin: 15px 0;
+	flex-grow: 1;
 }
 
 .input-box .division input {
@@ -46,11 +47,11 @@
 	border-radius: 10px;
 }
 
-.input-box .division:nth-child(3) label {
-	margin: 25px 0;
+.input-box .division .input-field {
+	width: 100%;
 }
+
 .input-box .division #description {
-	margin: 25px 0;
 	border: 1px solid #d3dfea;
 	padding: 15px 20px 15px 20px;
 	line-height: 200%;
@@ -70,7 +71,7 @@
 	flex-grow: 1;
 	height: 80px;
 	background-color: #eaefff;
-	min-width: 85%;
+	min-width: 100%;
 }
 
 .input-box .fVfcRr > span {
@@ -120,4 +121,75 @@
 
 .c-appointment-container::-webkit-scrollbar {
 	width: 4px;
+}
+
+/* media query start  */
+@media screen and (max-width: 1150px) {
+	.input-box .division td:first-child {
+		flex-basis: 18%;
+	}
+
+	.input-box .division td:last-child {
+		flex-basis: 81%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.input-box .cXBrtO span {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.input-box .division td:first-child {
+		flex-basis: 20%;
+	}
+
+	.input-box .division td:last-child {
+		flex-basis: 79%;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.input-box .division td:first-child {
+		flex-basis: 25%;
+	}
+
+	.input-box .division td:last-child {
+		flex-basis: 74%;
+	}
+
+	.c-appointment-container .input-box {
+		padding: 10px 10px;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.input-box .division td:first-child {
+		flex-basis: 28%;
+	}
+
+	.input-box .division td:last-child {
+		flex-basis: 67%;
+	}
+}
+
+@media screen and (max-width: 465px) {
+	.input-box .division td:first-child {
+		flex-basis: 30%;
+	}
+
+	.input-box .division td:last-child {
+		flex-basis: 70%;
+	}
+}
+
+@media screen and (max-width: 390px) {
+	.input-box .division td:first-child {
+		flex-basis: 38%;
+	}
+
+	.input-box .division td:last-child {
+		flex-basis: 62%;
+	}
 }

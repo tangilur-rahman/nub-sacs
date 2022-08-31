@@ -16,7 +16,8 @@ const Appointment = ({ setSelected }) => {
 		currentUser,
 		mySocket,
 		setNotifiUpdate,
-		setNotifiUpdateAdmin
+		setNotifiUpdateAdmin,
+		isMobile
 	} = GetContextApi();
 
 	// for get category values
@@ -153,73 +154,98 @@ const Appointment = ({ setSelected }) => {
 			<div className="c-appointment-container">
 				<h5>Create Appointment</h5>
 				<div className="input-box">
-					<form>
-						<div className="division">
-							<label htmlFor="subject">Subject : </label>
+					<table>
+						<tr className="division">
+							<td>
+								<label htmlFor="subject">Subject : </label>
+							</td>
+							<td>
+								<input
+									type="text"
+									id="subject"
+									name="subject"
+									autoFocus
+									onChange={onChangeHandler}
+									value={subject}
+									className="input-field"
+								/>
+							</td>
+						</tr>
 
-							<input
-								type="text"
-								id="subject"
-								name="subject"
-								autoFocus
-								onChange={onChangeHandler}
-								value={subject}
-								className="input-field"
-							/>
-						</div>
+						<tr className="division">
+							<td>
+								<label htmlFor="category">Category : </label>
+							</td>
 
-						<div className="division">
-							<label htmlFor="category">Category : </label>
-							<CategoryDropdown setCateV={setCateV} getCateV={getCateV} />
-						</div>
+							<td>
+								<CategoryDropdown
+									setCateV={setCateV}
+									getCateV={getCateV}
+									isMobile={isMobile}
+								/>
+							</td>
+						</tr>
 
-						<div className="division">
-							<label htmlFor="description">Description : </label>
-							<TextareaAutosize
-								id="description"
-								name="description"
-								placeholder="Write..."
-								onChange={onChangeHandler}
-								value={description}
-								className="input-field"
-								minRows={4}
-							/>
-						</div>
+						<tr className="division">
+							<td>
+								<label htmlFor="description">Description : </label>
+							</td>
 
-						<div className="division">
-							<label htmlFor="attachment">Attachment : </label>
-							<FileUploader
-								label="Upload or drop a file here..."
-								multiple={true}
-								name="file"
-								handleChange={(files) => setFiles(files)}
-								types={[
-									"JPEG",
-									"JPG",
-									"PNG",
-									"GIF",
-									"PDF",
-									"PPT",
-									"TXT",
-									"DOC",
-									"XLS",
-									"MP3",
-									"MP4",
-									"GIF"
-								]}
-								className="input-field"
-							/>
-						</div>
+							<td>
+								<TextareaAutosize
+									id="description"
+									name="description"
+									placeholder="Write..."
+									onChange={onChangeHandler}
+									value={description}
+									className="input-field"
+									minRows={4}
+								/>
+							</td>
+						</tr>
 
-						<div className="submit-btn">
-							<button
-								className="btn btn-success btn-style"
-								onClick={onSubmitHandler}
-							>
-								Sumit
-							</button>
-						</div>
-					</form>
+						<tr className="division">
+							<td>
+								<label htmlFor="attachment">Attachment : </label>
+							</td>
+
+							<td>
+								<FileUploader
+									label={isMobile ? "Uploads" : "Upload or drop a file here..."}
+									multiple={true}
+									name="file"
+									handleChange={(files) => setFiles(files)}
+									types={[
+										"JPEG",
+										"JPG",
+										"PNG",
+										"GIF",
+										"PDF",
+										"PPT",
+										"TXT",
+										"DOC",
+										"XLS",
+										"MP3",
+										"MP4",
+										"GIF"
+									]}
+									className="input-field"
+								/>
+							</td>
+						</tr>
+
+						<tr className="submit-btn">
+							<td></td>
+							<td>
+								<button
+									className="btn btn-success btn-style"
+									onClick={onSubmitHandler}
+								>
+									Sumit
+								</button>
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</>

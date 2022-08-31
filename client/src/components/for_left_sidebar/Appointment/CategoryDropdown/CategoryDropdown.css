@@ -2,14 +2,14 @@
 	position: relative;
 	display: flex;
 	align-items: flex-end;
-	width: 85%;
+	width: 100%;
 }
 
 .category-container::before {
 	content: "";
 	position: absolute;
 	right: 26px;
-	top: 25px;
+	top: 18px;
 	z-index: 1;
 	width: 8px;
 	height: 8px;
@@ -21,7 +21,7 @@
 	pointer-events: none;
 }
 .category-container.active::before {
-	top: 30px;
+	top: 23px;
 	transform: rotate(-225deg);
 }
 .c-appointment-container .category-container input {

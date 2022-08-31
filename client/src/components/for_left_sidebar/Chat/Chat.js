@@ -8,15 +8,13 @@ import ChatBoxSkeleton from "../../Skeleton/ChatBoxSkeleton/ChatBoxSkeleton";
 import "./Chat.css";
 import MessageBox from "./MessageBox/MessageBox";
 import UserBox from "./UserBox/UserBox";
-import { Viewport } from "./Viewport";
 
 const Chat = ({ messageId }) => {
 	// for get current user
-	const { currentUser, setHideMenu } = GetContextApi();
+	const { currentUser, setHideMenu, isMobile } = GetContextApi();
 
 	// for user-box & message-box toggle
 	const [chatT, setChatT] = useState(false);
-	const isMobile = Viewport("(max-width:768px)", true);
 
 	// check fetching complete or not from server
 	const [isLoading, setIsLoading] = useState(true);
