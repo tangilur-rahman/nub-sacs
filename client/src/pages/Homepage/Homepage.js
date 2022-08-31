@@ -41,7 +41,7 @@ const Homepage = ({
 	const [profileT, setProfileT] = useState(false);
 
 	// for menu-bar toggle
-	const [menuT, setMenuT] = useState(true);
+	const [menuT, setMenuT] = useState(false);
 
 	// for edit user by administrator
 	const [userEdit, setUserEdit] = useState(false);

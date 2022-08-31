@@ -584,7 +584,7 @@ const ProfileEdit = ({
 												<input
 													value={currentUser.semester}
 													readOnly
-													style={{ maxWidth: "190px" }}
+													style={{ maxWidth: "155px" }}
 												/>
 											</span>
 										)

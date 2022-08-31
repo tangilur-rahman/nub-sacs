@@ -193,7 +193,7 @@
 }
 
 .profile-edit-container .curr-user-info span.department input {
-	max-width: 160px;
+	max-width: 154px;
 }
 
 .profile-edit-container .curr-user-info span#total-students input {
@@ -393,6 +393,10 @@
 		width: 170px;
 		height: 170px;
 	}
+
+	.profile-edit-container .curr-user-info span {
+		margin: 15px 10px;
+	}
 }
 
 @media screen and (max-width: 500px) {
@@ -400,12 +404,15 @@
 		margin: 10px 0 0 0;
 		padding: 0 20px;
 	}
+	.profile-edit-container .curr-user-info span {
+		margin: 14px 10px;
+	}
 }
 
 @media screen and (max-width: 400px) {
 	.profile-edit-container .curr-user-info span {
 		padding: 10px 10px;
-		margin: 15px 10px;
+		margin: 13px 10px;
 	}
 
 	.profile-edit-container .curr-user-info span .input-text {
