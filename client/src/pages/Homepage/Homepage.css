@@ -116,7 +116,7 @@
 	}
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 992px) {
 	.homepage-container .right {
 		width: 100%;
 	}
