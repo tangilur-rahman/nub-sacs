@@ -740,7 +740,6 @@ const AppointmentDetails = ({ appDisplay, setAppDisplay, currentUser }) => {
 											</div>
 										</div>
 									)}
-
 									{/* reply-box end  */}
 
 									{/* delete control section start  */}
