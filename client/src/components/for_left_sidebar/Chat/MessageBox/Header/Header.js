@@ -274,6 +274,17 @@ const Header = ({
 	};
 	// for attachment img view end
 
+	// for back button click detected start
+	useEffect(() => {
+		window.onpopstate = () => {
+			setMessages("");
+			setHideMenu(false);
+			setChatT(false);
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+	// for back button click detected end
+
 	return (
 		<>
 			<div className="header-container">
