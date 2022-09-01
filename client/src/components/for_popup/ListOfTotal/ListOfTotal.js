@@ -2,7 +2,6 @@
 import moment from "moment";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import sortArray from "sort-array";
 
 // internal components
 import "./ListOfTotal.css";
@@ -278,96 +277,103 @@ const ListOfTotal = ({ totalValue, setTotalValue, setUserEdit }) => {
 
 									<tbody>
 										{displayingUser &&
-											sortArray(displayingUser, {
-												by: "updatedAt",
-												order: "desc"
-											}).map((value, index) => {
-												return (
-													<tr
-														key={index}
-														onClick={() => setSpecificUser(value._id)}
-													>
-														<td id="count">{index + 1}</td>
+											displayingUser
+												.map((value, index) => {
+													return (
+														<tr
+															key={index}
+															onClick={() => setSpecificUser(value._id)}
+														>
+															<td id="count">{index + 1}</td>
 
-														<td id="name">
-															<img
-																src={`uploads/profile-img/${value.profile_img}`}
-																alt="profile-img"
-																id="profile-img"
-																className="img-fluid"
-															/>
-															<input type="text" readOnly value={value.name} />
-														</td>
-
-														<td id="id">
-															<input type="text" readOnly value={value.id} />
-														</td>
-
-														<td id="email">
-															<input type="text" readOnly value={value.email} />
-														</td>
-
-														<td id="gender">
-															<input
-																type="text"
-																readOnly
-																value={value.gender}
-																style={{ textTransform: "capitalize" }}
-															/>
-														</td>
-
-														<td id="department">
-															<input
-																type="text"
-																readOnly
-																value={value.department.toUpperCase()}
-															/>
-														</td>
-
-														{totalValue === "List Of Advisors" && (
-															<td id="range">
+															<td id="name">
+																<img
+																	src={`uploads/profile-img/${value.profile_img}`}
+																	alt="profile-img"
+																	id="profile-img"
+																	className="img-fluid"
+																/>
 																<input
 																	type="text"
 																	readOnly
-																	value={
-																		value.minRange + " - " + value.maxRange
-																	}
+																	value={value.name}
 																/>
 															</td>
-														)}
 
-														{totalValue !== "List Of Advisors" && (
-															<>
-																<td id="semester">
+															<td id="id">
+																<input type="text" readOnly value={value.id} />
+															</td>
+
+															<td id="email">
+																<input
+																	type="text"
+																	readOnly
+																	value={value.email}
+																/>
+															</td>
+
+															<td id="gender">
+																<input
+																	type="text"
+																	readOnly
+																	value={value.gender}
+																	style={{ textTransform: "capitalize" }}
+																/>
+															</td>
+
+															<td id="department">
+																<input
+																	type="text"
+																	readOnly
+																	value={value.department.toUpperCase()}
+																/>
+															</td>
+
+															{totalValue === "List Of Advisors" && (
+																<td id="range">
 																	<input
 																		type="text"
 																		readOnly
-																		value={value.semester}
+																		value={
+																			value.minRange + " - " + value.maxRange
+																		}
 																	/>
 																</td>
+															)}
 
-																<td id="year">
-																	<input
-																		type="text"
-																		readOnly
-																		value={value.year}
-																	/>
-																</td>
-															</>
-														)}
+															{totalValue !== "List Of Advisors" && (
+																<>
+																	<td id="semester">
+																		<input
+																			type="text"
+																			readOnly
+																			value={value.semester}
+																		/>
+																	</td>
 
-														<td id="update-date">
-															<input
-																type="text"
-																readOnly
-																value={moment(value.updatedAt).format(
-																	"DD MMM YY"
-																)}
-															/>
-														</td>
-													</tr>
-												);
-											})}
+																	<td id="year">
+																		<input
+																			type="text"
+																			readOnly
+																			value={value.year}
+																		/>
+																	</td>
+																</>
+															)}
+
+															<td id="update-date">
+																<input
+																	type="text"
+																	readOnly
+																	value={moment(value.updatedAt).format(
+																		"DD MMM YY"
+																	)}
+																/>
+															</td>
+														</tr>
+													);
+												})
+												.reverse()}
 									</tbody>
 								</table>
 							</div>
