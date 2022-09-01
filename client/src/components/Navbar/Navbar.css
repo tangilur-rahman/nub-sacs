@@ -460,8 +460,13 @@
 
 @media screen and (max-width: 450px) {
 	.right .notification-container#for-message {
-		right: -154px;
-		width: 414px;
+		right: -145px;
+		width: 374px !important;
+	}
+
+	.right .notification-container#for-appointment {
+		right: -85px;
+		width: 374px !important;
 	}
 
 	.right .notification-container .notification-display {
