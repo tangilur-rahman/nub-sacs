@@ -206,7 +206,7 @@ const Appointment = ({ setSelected }) => {
 
 						<tr className="division">
 							<td>
-								<label htmlFor="attachment">Attachment : </label>
+								<label htmlFor="attachment">Attachment: </label>
 							</td>
 
 							<td>
