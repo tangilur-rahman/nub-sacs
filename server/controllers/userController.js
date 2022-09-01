@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 // internal modules
 const advisorModel = require("./../models/advisorModel");
 const studentModel = require("./../models/studentModel");
+const personalChatModel = require("./../models/personalChatModel");
+const groupChatModel = require("./../models/groupChatModel");
 
 // get currentUser
 const currentUser = async (req, res) => {
@@ -391,6 +393,25 @@ const getAdvisors = async (req, res) => {
 	}
 };
 
+const getMessages = async (req, res) => {
+	try {
+		const document = await personalChatModel.findOne({ _id: req.params._id });
+
+		if (document) {
+			res.status(200).json(document);
+		} else {
+			const document = await groupChatModel.findOne({ _id: req.params._id });
+			if (document) {
+				res.status(200).json(document);
+			} else {
+				res.status(500).json({ error: "Something was wrong!" });
+			}
+		}
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+};
+
 module.exports = {
 	currentUser,
 	getAllAdvisors,
@@ -405,5 +426,6 @@ module.exports = {
 	searchAdvisors,
 	searchStudents,
 	getTotalStudents,
-	getAdvisors
+	getAdvisors,
+	getMessages
 };

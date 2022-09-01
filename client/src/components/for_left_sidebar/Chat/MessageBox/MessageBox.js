@@ -22,6 +22,9 @@ const MessageBox = ({
 	// for get current-user
 	const { currentUser, setUpdateCount } = GetContextApi();
 
+	// for refetching messages
+	const [refetching, setRefetching] = useState("");
+
 	// for rending messages array
 	const [displayMessages, setDisplayMessages] = useState("");
 
@@ -179,6 +182,39 @@ const MessageBox = ({
 		}
 	}, [getMessages]);
 
+	useEffect(() => {
+		if (refetching) {
+			(async () => {
+				try {
+					const response = await fetch(`/user/messages/${getMessages._id}`);
+					const result = await response.json();
+					if (response.status === 200) {
+						if (result) {
+							setMessages(result);
+						} else {
+							return;
+						}
+					} else if (result.error) {
+						toast.error(result.error, {
+							position: "top-right",
+							theme: "colored",
+							autoClose: 3000
+						});
+					}
+				} catch (error) {
+					toast.error(error.message, {
+						position: "top-right",
+						theme: "colored",
+						autoClose: 3000
+					});
+				}
+			})();
+		} else {
+			return;
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [refetching]);
+
 	return (
 		<>
 			{getMessages ? (
@@ -206,6 +242,7 @@ const MessageBox = ({
 							setLatestGroup={setLatestGroup}
 							setLatestPersonal={setLatestPersonal}
 							isMobile={isMobile}
+							setRefetching={setRefetching}
 						/>
 					)}
 				</div>

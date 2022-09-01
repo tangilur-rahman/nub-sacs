@@ -20,7 +20,8 @@ const {
 	searchAdvisors,
 	searchStudents,
 	getTotalStudents,
-	getAdvisors
+	getAdvisors,
+	getMessages
 } = require("./../controllers/userController");
 const { multerForImg } = require("../Config/multerManager");
 
@@ -76,5 +77,8 @@ user.get("/student/search/:search", authUser, searchStudents);
 
 // for get all advisors department wise for student
 user.get("/advisors/:department", getAdvisors);
+
+// for get specific message
+user.get("/messages/:_id", getMessages);
 
 module.exports = user;

@@ -26,7 +26,7 @@ const Homepage = ({
 	setAppDisplay,
 	setMessageId
 }) => {
-	const { currentUser, setCurrentUser, isSubmitted, hideMenu } =
+	const { currentUser, setCurrentUser, isSubmitted, hideMenu, isMobile } =
 		GetContextApi();
 
 	// for redirect login-page
@@ -126,7 +126,23 @@ const Homepage = ({
 				</div>
 			) : (
 				<>
-					{!hideMenu && (
+					{isMobile ? (
+						<>
+							{!hideMenu && (
+								<Navbar
+									currentUser={currentUser}
+									registerT={registerT}
+									setRegisterT={setRegisterT}
+									setTotalValue={setTotalValue}
+									setProfileT={setProfileT}
+									created={created}
+									setAppDisplay={setAppDisplay}
+									setMessageId={setMessageId}
+									setSelected={setSelected}
+								/>
+							)}
+						</>
+					) : (
 						<Navbar
 							currentUser={currentUser}
 							registerT={registerT}

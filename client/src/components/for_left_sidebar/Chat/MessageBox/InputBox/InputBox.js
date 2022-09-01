@@ -14,7 +14,8 @@ const InputBox = ({
 	setDisplayMessages,
 	setLatestGroup,
 	setLatestPersonal,
-	isMobile
+	isMobile,
+	setRefetching
 }) => {
 	// for get current-user
 	const { currentUser, mySocket, setNotifiUpdate } = GetContextApi();
@@ -30,6 +31,9 @@ const InputBox = ({
 
 	// for attachment-file toggle
 	const [attachmentT, setAttachmentT] = useState(false);
+
+	// for loading until file was submitted
+	const [isLoading, setIsLoading] = useState(false);
 
 	// for file attachment-file
 	const [getFile, setFile] = useState("");
@@ -85,10 +89,6 @@ const InputBox = ({
 		mySocket?.on("receive_message", (message) => {
 			setSocketMessage(message);
 		});
-
-		if (getFile) {
-			setFile("");
-		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [getMessages]);
@@ -564,6 +564,7 @@ const InputBox = ({
 	const fileSubmitHandler = async (event) => {
 		event.preventDefault();
 		if (getFile) {
+			setIsLoading(true);
 			// for send message socket start
 			const messageObject = {
 				id: currentUser?.id,
@@ -687,10 +688,6 @@ const InputBox = ({
 			// for send notification socket end
 
 			try {
-				setFile(false);
-				setAttachText("");
-				setInputText("");
-
 				const formData = new FormData();
 
 				formData.append("_id", getMessages._id);
@@ -712,7 +709,11 @@ const InputBox = ({
 					const result = await response.json();
 
 					if (response.status === 200) {
-						return;
+						setRefetching(Date.now());
+						setIsLoading(false);
+						setAttachText("");
+						setInputText("");
+						setFile("");
 					} else if (response.status === 400) {
 						toast(result.message, {
 							position: "top-right",
@@ -735,7 +736,11 @@ const InputBox = ({
 					const result = await response.json();
 
 					if (response.status === 200) {
-						return;
+						setRefetching(Date.now());
+						setIsLoading(false);
+						setAttachText("");
+						setInputText("");
+						setFile("");
 					} else if (response.status === 400) {
 						toast(result.message, {
 							position: "top-right",
@@ -895,7 +900,17 @@ const InputBox = ({
 							className="btn btn-success"
 							onClick={fileSubmitHandler}
 						>
-							Submit
+							{isLoading ? (
+								<i
+									className="fas fa-spinner fa-pulse"
+									style={{
+										padding: "0 20px",
+										fontSize: "20px"
+									}}
+								></i>
+							) : (
+								"Submit"
+							)}
 						</button>
 					</div>
 				</div>

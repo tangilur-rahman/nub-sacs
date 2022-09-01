@@ -28,7 +28,7 @@ const multerForImg = (filename) => {
 	});
 
 	// prepare the final multer upload object
-	var upload = multer({
+	let upload = multer({
 		storage: storage,
 		limits: {
 			fileSize: 5000000 // 5MB
@@ -80,10 +80,10 @@ const multerForAttachment = (fileName) => {
 	});
 
 	// prepare the final multer upload object
-	var upload = multer({
+	let upload = multer({
 		storage: storage,
 		limits: {
-			fileSize: 50000000 // 50MB
+			fileSize: 5e7 // 50MB
 		},
 		fileFilter: (req, file, cb) => {
 			if (file.fieldname === fileName) {
@@ -108,7 +108,6 @@ const multerForAttachment = (fileName) => {
 				) {
 					cb(null, true);
 				} else {
-					console.log(file.mimetype);
 					cb(new Error("Invalid file-type!"));
 				}
 			} else {
