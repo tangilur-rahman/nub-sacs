@@ -9,9 +9,9 @@ const GenderDropdown = ({ getGender, setGender }) => {
 
 	const displayGender = () => {
 		if (getGender === "male") {
-			return "👨‍🦰  Male";
+			return "👱‍♂️  Male";
 		} else if (getGender === "female") {
-			return "👩‍🦰  Female";
+			return "👩 Female";
 		} else if (getGender === "other") {
 			return "⚨  Other";
 		}
@@ -32,10 +32,10 @@ const GenderDropdown = ({ getGender, setGender }) => {
 				/>
 				<div className="option">
 					<div onClick={() => setGender("male")}>
-						<span>👨‍🦰 &nbsp; Male</span>
+						<span>👱‍♂️ &nbsp; Male</span>
 					</div>
 					<div onClick={() => setGender("female")}>
-						<span>👩‍🦰 &nbsp; Female</span>
+						<span>👩 &nbsp; Female</span>
 					</div>
 
 					<div onClick={() => setGender("other")}>

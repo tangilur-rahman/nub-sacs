@@ -9,9 +9,9 @@ const GenderDropdown = ({ getGender, setGender, editT }) => {
 
 	const displayGender = () => {
 		if (getGender === "male") {
-			return "👨‍🦰  Male";
+			return "👱‍♂️  Male";
 		} else if (getGender === "female") {
-			return "👩‍🦰  Female";
+			return "👩  Female";
 		} else if (getGender === "other") {
 			return "⚨  Other";
 		}
@@ -41,10 +41,10 @@ const GenderDropdown = ({ getGender, setGender, editT }) => {
 					/>
 					<div className="option">
 						<div onClick={() => setGender("male")}>
-							<div>👨‍🦰 &nbsp; Male</div>
+							<div>👱‍♂️ &nbsp; Male</div>
 						</div>
 						<div onClick={() => setGender("female")}>
-							<div>👩‍🦰 &nbsp; Female</div>
+							<div>👩 &nbsp; Female</div>
 						</div>
 
 						<div onClick={() => setGender("other")}>
