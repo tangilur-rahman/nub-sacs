@@ -51,7 +51,7 @@ const ReplyPopup = ({
 	return (
 		<div className="popup-container" data-aos="fade-down" data-aos-delay="0">
 			<div className="row wrapper" ref={modalRef}>
-				<div className="col-8 reply-popup-container">
+				<div className="col-xl-8 col-lg-10 col-11 reply-popup-container">
 					<ScrollToBottom
 						scrollViewClassName={
 							currentUser.role === "administrator"

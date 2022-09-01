@@ -14,8 +14,7 @@
 	box-shadow: var(--box-shadow);
 	min-height: fit-content;
 	max-height: 81vh;
-	overflow-y: scroll;
-	overflow-x: hidden;
+	overflow: auto;
 	padding: 0 30px;
 	position: relative;
 	padding-bottom: 15px;
@@ -119,6 +118,7 @@
 .appointment-details .details > div p {
 	text-align: justify;
 	flex-grow: 1;
+	width: 100%;
 	margin: 0;
 }
 
@@ -153,12 +153,12 @@
 .details .top-row #date p {
 	margin-left: 18px;
 }
-
 /* top row style end  */
 
 .appointment-details .details .description {
 	flex-grow: 1;
 	margin-left: 10px;
+	min-width: 400px;
 }
 
 .appointment-details .details .description p {
@@ -176,6 +176,7 @@
 .appointment-details .details .attachments {
 	display: flex;
 	align-items: center;
+	margin-left: 10px;
 }
 
 .appointment-details .details .attachments a {
@@ -241,6 +242,8 @@
 	border-radius: 10px;
 	font-weight: 500;
 	border: 2px solid #dee2e6;
+	width: 300px;
+	margin-left: 10px;
 }
 
 .wrapper .app-date .react-datetime-picker__wrapper {
@@ -261,6 +264,7 @@
 	display: flex;
 	flex-grow: 1;
 	justify-content: flex-end;
+	margin-left: 20px;
 }
 
 .advisor-section .app-status #solved {
@@ -358,7 +362,6 @@
 }
 
 .appointment-details #outside-advisor .wrapper {
-	flex-grow: 1;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -369,6 +372,7 @@
 .appointment-details #outside-advisor span {
 	max-width: 12%;
 	font-weight: 600;
+	display: none;
 }
 
 .appointment-details #outside-advisor #solved {
@@ -607,6 +611,16 @@
 
 	.appointment-details #outside-advisor .wrapper {
 		display: flex;
+		justify-content: space-between;
+		width: 650px;
+	}
+
+	.appointment-details #outside-advisor span {
+		display: inline-block;
+	}
+
+	.advisor-section .wrapper .app-date .date-picker {
+		margin-left: 0px;
 	}
 }
 
@@ -631,5 +645,65 @@
 		flex-basis: 100%;
 		order: 3;
 		margin-top: 10px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.details .top-row {
+		flex-direction: column;
+	}
+
+	.details .top-row #date {
+		margin-top: 10px;
+	}
+
+	.appointment-details-container .appointment-details {
+		padding: 0 10px 15px 10px;
+	}
+}
+
+@media screen and (max-width: 520px) {
+	.appointment-details .header .user-info:last-child {
+		margin: 10px 30px 0 0;
+	}
+
+	.reply-box-container .reply-box button {
+		margin-left: 10px;
+	}
+}
+
+/* media query for conformation popup  */
+@media screen and (max-width: 970px) {
+	.appointment-details .conformation-popup {
+		top: 20%;
+		left: 22%;
+	}
+}
+
+@media screen and (max-width: 830px) {
+	.appointment-details .conformation-popup {
+		top: 20%;
+		left: 17%;
+	}
+}
+
+@media screen and (max-width: 740px) {
+	.appointment-details .conformation-popup {
+		padding: 20px 20px 10px;
+		left: 15%;
+	}
+}
+
+@media screen and (max-width: 660px) {
+	.appointment-details .conformation-popup {
+		padding: 10px 20px;
+		margin: 0 20px;
+		left: 7%;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.appointment-details .conformation-popup {
+		left: 0%;
 	}
 }

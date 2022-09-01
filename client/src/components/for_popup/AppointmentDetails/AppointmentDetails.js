@@ -12,8 +12,13 @@ import ReplyPopup from "./ReplyPopup/ReplyPopup";
 
 const AppointmentDetails = ({ appDisplay, setAppDisplay, currentUser }) => {
 	// for updating dashboard
-	const { setIsSubmitted, mySocket, setNotifiUpdate, setNotifiUpdateAdmin } =
-		GetContextApi();
+	const {
+		setIsSubmitted,
+		mySocket,
+		setNotifiUpdate,
+		setNotifiUpdateAdmin,
+		isMobile
+	} = GetContextApi();
 
 	// for loading until fetching not complete
 	const [isLoading, setIsLoading] = useState(true);
@@ -471,69 +476,105 @@ const AppointmentDetails = ({ appDisplay, setAppDisplay, currentUser }) => {
 									<div className="details">
 										<div className="top-row for-margin">
 											<div id="category">
-												<span>Category&nbsp;:</span>
-												<p>{specificApp?.category}</p>
+												<tr>
+													<td>
+														<span>Category&nbsp;:</span>
+													</td>
+													<td>
+														<p>{specificApp?.category}</p>
+													</td>
+												</tr>
 											</div>
 
 											<div id="date">
-												<span>Date&nbsp;:</span>
-												<p>
-													{moment(specificApp?.createdAt).format(
-														"h:mm A - MMMM DD, YYYY"
-													)}
-												</p>
+												<tr>
+													<td>
+														<span>Date&nbsp;:</span>
+													</td>
+													<td>
+														<p>
+															{moment(specificApp?.createdAt).format(
+																"h:mm A - MMMM DD, YYYY"
+															)}
+														</p>
+													</td>
+												</tr>
 											</div>
 										</div>
 
 										<div className="for-margin">
-											<span>Description:</span>
-											<div className="description">
-												<p>{specificApp?.description}</p>
-											</div>
+											<tr>
+												<td>
+													<span>Description:</span>
+												</td>
+												<td>
+													<div className="description">
+														<p>{specificApp?.description}</p>
+													</div>
+												</td>
+											</tr>
 										</div>
 
 										<div className="for-margin">
-											<span>Attachments &nbsp;:</span>
-											<div className="attachments">
-												{specificApp.attachments?.length > 0 ? (
-													specificApp.attachments.map((value, index) => {
-														return (
-															<a
-																href={`uploads/attachments/${value}`}
-																download
-																key={index}
-															>
-																{value.split(/[-]/).slice(0, 1, -1) +
-																	"." +
-																	value.split(".").slice(-1)[0]}
-															</a>
-														);
-													})
-												) : (
-													<h6>Null</h6>
-												)}
-											</div>
+											<tr>
+												<td>
+													<span>Attachments&nbsp;:</span>
+												</td>
+												<td>
+													<div className="attachments">
+														{specificApp.attachments?.length > 0 ? (
+															specificApp.attachments.map((value, index) => {
+																return (
+																	<a
+																		href={`uploads/attachments/${value}`}
+																		download
+																		key={index}
+																	>
+																		{value.split(/[-]/).slice(0, 1, -1) +
+																			"." +
+																			value.split(".").slice(-1)[0]}
+																	</a>
+																);
+															})
+														) : (
+															<h6>Null</h6>
+														)}
+													</div>
+												</td>
+											</tr>
 										</div>
 
 										{currentUser.role === "student" && (
 											<div className="for-margin" id="status">
-												<span>Curr.. &nbsp;Status&nbsp;:</span>
-												<p>{specificApp?.status}</p>
+												<tr>
+													<td>
+														<span>Curr.. &nbsp;Status&nbsp;: &nbsp;</span>
+													</td>
+													<td>
+														<p>{specificApp?.status}</p>
+													</td>
+												</tr>
 											</div>
 										)}
 
 										{currentUser.role === "student" && (
 											<div className="for-margin" id="appointment-date">
-												<span>Appt.. &nbsp;Date&nbsp;:</span>
-												{specificApp?.appointment_date ? (
-													<p>
-														{moment(specificApp?.appointment_date).format(
-															"h:mm A - MMMM DD, YYYY"
+												<tr>
+													<td>
+														<span>Appt.. &nbsp;Date&nbsp;: &nbsp;</span>
+													</td>
+													<td>
+														{specificApp?.appointment_date ? (
+															<p>
+																{moment(specificApp?.appointment_date).format(
+																	"h:mm A - MMMM DD, YYYY"
+																)}
+															</p>
+														) : (
+															<p>Null</p>
 														)}
-													</p>
-												) : (
-													<p>Null</p>
-												)}
+													</td>
+												</tr>
 											</div>
 										)}
 									</div>
@@ -543,94 +584,114 @@ const AppointmentDetails = ({ appDisplay, setAppDisplay, currentUser }) => {
 									{currentUser.role !== "student" && (
 										<>
 											<div className="advisor-section">
-												<span>Appointment Date &nbsp;:</span>
-												<div className="wrapper">
-													<div className="app-date">
-														<DateTimePicker
-															className="date-picker"
-															onChange={(date) => setPicDate(date)}
-															value={picDate}
-															format="dd-MM-y  h:mm a"
-														/>
-													</div>
+												<tr>
+													<td>
+														<span>App...Date&nbsp;:</span>
+													</td>
+													<td>
+														<div className="wrapper">
+															<div className="app-date">
+																<DateTimePicker
+																	className="date-picker"
+																	onChange={(date) => setPicDate(date)}
+																	value={picDate}
+																	format="dd-MM-y  h:mm a"
+																/>
+															</div>
 
-													<div className="app-status" id="inside-wrapper">
-														<div
-															id="solved"
-															className={getStatus === "solved" ? "active" : ""}
-															onClick={() => setStatus("solved")}
-														>
-															<div>Solved Appt..</div>
-															<div className="icon-container">
-																<i className="fa-solid fa-circle-check"></i>
+															<div className="app-status" id="inside-wrapper">
+																<div
+																	id="solved"
+																	className={
+																		getStatus === "solved" ? "active" : ""
+																	}
+																	onClick={() => setStatus("solved")}
+																>
+																	<div>Solved Appt..</div>
+																	<div className="icon-container">
+																		<i className="fa-solid fa-circle-check"></i>
+																	</div>
+																</div>
+
+																<div
+																	id="pending"
+																	className={
+																		getStatus === "pending" ? "active" : ""
+																	}
+																	onClick={() => setStatus("pending")}
+																>
+																	<div> Pending Appt..</div>
+																	<div className="icon-container">
+																		<i className="fa-solid fa-hourglass-half"></i>
+																	</div>
+																</div>
+
+																<div
+																	id="rejected"
+																	className={
+																		getStatus === "rejected" ? "active" : ""
+																	}
+																	onClick={() => setStatus("rejected")}
+																>
+																	<div>Rejected Appt..</div>
+																	<div className="icon-container">
+																		<i className="fa-solid fa-circle-xmark"></i>
+																	</div>
+																</div>
 															</div>
 														</div>
-
-														<div
-															id="pending"
-															className={
-																getStatus === "pending" ? "active" : ""
-															}
-															onClick={() => setStatus("pending")}
-														>
-															<div> Pending Appt..</div>
-															<div className="icon-container">
-																<i className="fa-solid fa-hourglass-half"></i>
-															</div>
-														</div>
-
-														<div
-															id="rejected"
-															className={
-																getStatus === "rejected" ? "active" : ""
-															}
-															onClick={() => setStatus("rejected")}
-														>
-															<div>Rejected Appt..</div>
-															<div className="icon-container">
-																<i className="fa-solid fa-circle-xmark"></i>
-															</div>
-														</div>
-													</div>
-												</div>
+													</td>
+												</tr>
 											</div>
 
 											<div id="outside-advisor">
-												<span>Status :</span>
-												<div className="wrapper">
-													<div
-														id="solved"
-														className={getStatus === "solved" ? "active" : ""}
-														onClick={() => setStatus("solved")}
-													>
-														<div>Solved Appt..</div>
-														<div className="icon-container">
-															<i className="fa-solid fa-circle-check"></i>
-														</div>
-													</div>
+												<tr>
+													<td>
+														<span>Status:</span>
+													</td>
+													<td>
+														<div className="wrapper">
+															<div
+																id="solved"
+																className={
+																	getStatus === "solved" ? "active" : ""
+																}
+																onClick={() => setStatus("solved")}
+															>
+																<div>Solved Appt..</div>
+																<div className="icon-container">
+																	<i className="fa-solid fa-circle-check"></i>
+																</div>
+															</div>
 
-													<div
-														id="pending"
-														className={getStatus === "pending" ? "active" : ""}
-														onClick={() => setStatus("pending")}
-													>
-														<div> Pending Appt..</div>
-														<div className="icon-container">
-															<i className="fa-solid fa-hourglass-half"></i>
-														</div>
-													</div>
+															<div
+																id="pending"
+																className={
+																	getStatus === "pending" ? "active" : ""
+																}
+																onClick={() => setStatus("pending")}
+															>
+																<div> Pending Appt..</div>
+																<div className="icon-container">
+																	<i className="fa-solid fa-hourglass-half"></i>
+																</div>
+															</div>
 
-													<div
-														id="rejected"
-														className={getStatus === "rejected" ? "active" : ""}
-														onClick={() => setStatus("rejected")}
-													>
-														<div>Rejected Appt..</div>
-														<div className="icon-container">
-															<i className="fa-solid fa-circle-xmark"></i>
+															<div
+																id="rejected"
+																className={
+																	getStatus === "rejected" ? "active" : ""
+																}
+																onClick={() => setStatus("rejected")}
+															>
+																<div>Rejected Appt..</div>
+																<div className="icon-container">
+																	<i className="fa-solid fa-circle-xmark"></i>
+																</div>
+															</div>
 														</div>
-													</div>
-												</div>
+													</td>
+												</tr>
 											</div>
 										</>
 									)}
@@ -660,7 +721,7 @@ const AppointmentDetails = ({ appDisplay, setAppDisplay, currentUser }) => {
 									{/* reply-box start  */}
 									{currentUser.role !== "administrator" && (
 										<div className="reply-box-container">
-											<span>Reply &nbsp;:</span>
+											{!isMobile ? <span>Reply :</span> : ""}
 
 											<div className="reply-box">
 												<TextareaAutosize
