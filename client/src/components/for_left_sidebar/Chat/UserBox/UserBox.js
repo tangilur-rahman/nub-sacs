@@ -77,7 +77,7 @@ const UserBox = ({
 
 				<div
 					className="user-content"
-					id={currentUser?.role === "student" ? "student" : ""}
+					id={currentUser?.role !== "advisor" ? "student" : ""}
 				>
 					{/* for group-chat start  */}
 					{currentUser.role !== "administrator" && (
