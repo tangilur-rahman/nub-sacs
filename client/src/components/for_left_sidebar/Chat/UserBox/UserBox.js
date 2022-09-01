@@ -58,7 +58,7 @@ const UserBox = ({
 	return (
 		<>
 			<div className="user-box" data-aos="fade-right" data-aos-delay="0">
-				{currentUser?.role !== "student" && (
+				{currentUser?.role === "advisor" && (
 					<div className="search">
 						<i className="bi bi-search-heart"></i>
 						<form>
