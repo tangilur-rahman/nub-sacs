@@ -1,5 +1,4 @@
 // internal modules
-const advisorModel = require("../models/advisorModel");
 const appModel = require("../models/appointmentModel");
 
 // create appointment
