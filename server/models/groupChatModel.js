@@ -18,6 +18,8 @@ const schema = mongoose.Schema(
 			default: "group-default.png"
 		},
 
+		department: String,
+
 		messages: [
 			{
 				id: String,

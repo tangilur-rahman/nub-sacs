@@ -14,13 +14,15 @@ const AdvisorDropdown = ({
 	const [advisorDropT, setAdvisorDropT] = useState(false);
 
 	const displayDepartment = () => {
-		if (getAdvisor.gender === "male") {
-			return "🙍‍♂️ " + getAdvisor.name;
-		} else if (
-			getAdvisor.gender === "female" ||
-			getAdvisor.gender === "other"
-		) {
-			return "🙎‍♀️ " + getAdvisor.name;
+		if (getAdvisor) {
+			if (getAdvisor.gender === "male") {
+				return "👨‍🏫  " + getAdvisor.name;
+			} else if (
+				getAdvisor.gender === "female" ||
+				getAdvisor.gender === "other"
+			) {
+				return "👩‍🏫  " + getAdvisor.name;
+			}
 		}
 	};
 
@@ -28,7 +30,7 @@ const AdvisorDropdown = ({
 		<>
 			{!editT ? (
 				<input
-					value={getAdvisor.name}
+					value={getAdvisor ? getAdvisor.name : "Null"}
 					style={{
 						textAlign: "start",
 						maxWidth: "200px"

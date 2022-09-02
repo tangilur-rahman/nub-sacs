@@ -45,8 +45,9 @@ const ProfileEdit = ({
 		userEdit.role === "advisor" && userEdit.maxRange
 	);
 	const [getYear, setYear] = useState(
-		userEdit.role === "student" && userEdit.year
+		userEdit.role === "student" && new Date(userEdit.year)
 	);
+
 	const [getAdvisor, setAdvisor] = useState(
 		userEdit.role === "student" && userEdit.advisor
 	);
@@ -394,9 +395,7 @@ const ProfileEdit = ({
 		if (userEdit.role === "student") {
 			(async () => {
 				try {
-					const response = await fetch(
-						`/user/advisors/${getAdvisor.department}`
-					);
+					const response = await fetch(`/user/advisors/${getDepart}`);
 					const result = await response.json();
 
 					if (response.status === 200) {

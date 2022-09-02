@@ -14,7 +14,10 @@ const createOrGet = async (req, res) => {
 				res.status(200).json(findGroups);
 			}
 		} else if (req.currentUser.role === "advisor") {
-			const findGroup = await groupModel.findOne({ room: req.currentUser._id });
+			const findGroup = await groupModel.findOne({
+				room: req.currentUser._id,
+				department: req.currentUser.department
+			});
 
 			if (findGroup) {
 				res.status(200).json(findGroup);
@@ -23,7 +26,8 @@ const createOrGet = async (req, res) => {
 				const createGroup = await groupModel({
 					group_name:
 						"Department Of" + " " + req.currentUser.department.toUpperCase(),
-					room: req.currentUser._id
+					room: req.currentUser._id,
+					department: req.currentUser.department
 				});
 
 				const document = await adminModel.findOne({ role: "administrator" });
@@ -40,7 +44,8 @@ const createOrGet = async (req, res) => {
 			}
 		} else if (req.currentUser.role === "student") {
 			const findGroup = await groupModel.findOne({
-				room: req.currentUser.advisor._id
+				room: req.currentUser.advisor._id,
+				department: req.currentUser.department
 			});
 
 			if (findGroup) {
@@ -50,7 +55,8 @@ const createOrGet = async (req, res) => {
 				const createGroup = await groupModel({
 					group_name:
 						"Department Of" + " " + req.currentUser.department.toUpperCase(),
-					room: req.currentUser.advisor._id
+					room: req.currentUser.advisor._id,
+					department: req.currentUser.department
 				});
 				const document = await adminModel.findOne({ role: "administrator" });
 
