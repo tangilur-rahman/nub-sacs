@@ -6,14 +6,11 @@ const appModel = require("../models/appointmentModel");
 const submitAppointment = async (req, res) => {
 	try {
 		const { subject, category, description } = req.body;
-		const { department, semester, year } = req.currentUser;
-
-		const advisor = await advisorModel.findOne({ department, semester, year });
 
 		if (subject && category && description) {
 			const document = await appModel({
 				student: req.currentUser._id,
-				advisor: advisor._id,
+				advisor: req.currentUser.advisor._id,
 				subject,
 				category,
 				description

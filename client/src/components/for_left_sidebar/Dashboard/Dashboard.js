@@ -48,7 +48,7 @@ const Dashboard = ({ setSelected, setAppDisplay }) => {
 	useEffect(() => {
 		getAllAppointment();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isSubmitted]);
+	}, [isSubmitted, currentUser]);
 
 	// for real-time display appointment through socket start
 	useEffect(() => {
