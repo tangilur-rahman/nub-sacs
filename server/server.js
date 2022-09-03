@@ -106,7 +106,9 @@ if (process.env.NODE_ENV == "production") {
 // submit on remote server end
 
 // error handler
-app.use(customErrorHandler);
+if (process.env.NODE_ENV != "production") {
+	app.use(customErrorHandler);
+}
 
 // listening port
 const port = process.env.PORT || 4000;
