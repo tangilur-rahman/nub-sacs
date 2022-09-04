@@ -10,6 +10,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 
 const Login = () => {
+	// summary toggle
+	const [summaryT, setSummaryT] = useState("auth");
+
 	// For redirect "/dashboard"
 	const Navigate = useNavigate();
 
@@ -170,6 +173,79 @@ const Login = () => {
 									</button>
 								</form>
 							</div>
+						</div>
+					</div>
+
+					<div className="row m-0 project-summary-container">
+						<div className="col-10 p-0 project-summary">
+							<div className="tab-container">
+								<h6
+									onClick={() => setSummaryT("auth")}
+									className="hover-link"
+									id={summaryT === "auth" ? "underline" : ""}
+								>
+									Authentication
+								</h6>
+								<h6
+									onClick={() => setSummaryT("summary")}
+									className="hover-link"
+									id={summaryT === "summary" ? "underline" : ""}
+								>
+									Summary
+								</h6>
+							</div>
+
+							<table>
+								<tr>
+									<td>Administrator: </td>
+									{summaryT === "auth" ? (
+										<td>
+											<span>Email:</span> admin@gmail.com <span>Id:</span> 10
+											<span>Password:</span> 12345678
+										</td>
+									) : (
+										<td className="details">
+											Administrator can CRUD operation with all advisors &
+											students accounts, see all students's appointment details,
+											real-time group chatting & get notifications and more.
+										</td>
+									)}
+								</tr>
+
+								<tr>
+									<td>Advisor:</td>
+									{summaryT === "auth" ? (
+										<td>
+											<span>Email:</span> advisor@gmail.com <span>Id:</span> 100
+											<span>Password:</span> 12345678
+										</td>
+									) : (
+										<td className="details">
+											Advisor can see specific students all appointments, pick
+											appointment date & changes appointments status & reply,
+											chatting with specific students in group or personally,
+											get notifications, send any types of documents, modify
+											profile and more.
+										</td>
+									)}
+								</tr>
+
+								<tr>
+									<td>Student:</td>
+									{summaryT === "auth" ? (
+										<td>
+											<span>Email:</span> student@gmail.com <span>Id:</span> 200
+											<span>Password:</span> 12345678
+										</td>
+									) : (
+										<td className="details">
+											Student can create multiple appointments, chatting his/her
+											advisor, department wise group chat, get notifications,
+											send any types of documents, modify profile and more.
+										</td>
+									)}
+								</tr>
+							</table>
 						</div>
 					</div>
 				</div>
