@@ -596,6 +596,7 @@ const AppointmentDetails = ({ appDisplay, setAppDisplay, currentUser }) => {
 																	onChange={(date) => setPicDate(date)}
 																	value={picDate}
 																	format="dd-MM-y  h:mm a"
+																	minDate={moment().toDate()}
 																/>
 															</div>
 
