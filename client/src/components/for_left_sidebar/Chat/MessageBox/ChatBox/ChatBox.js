@@ -1,8 +1,8 @@
 // external components
+import moment from "moment";
 import { useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import sortArray from "sort-array";
-import TimeAgo from "timeago-react";
 
 // internal components
 import { GetContextApi } from "../../../../../ContextApi";
@@ -158,7 +158,7 @@ const ChatBox = ({ displayMessages, getMessages }) => {
 												)}
 
 												<div id="time">
-													<TimeAgo datetime={message.time} />
+													{moment(message.time).format("h:mm a")}
 												</div>
 											</div>
 										</div>
