@@ -51,6 +51,7 @@
 .user-box .user img {
 	margin: 0 0 0 10px;
 	cursor: pointer;
+	outline: 2px solid black;
 }
 
 .user-box .user section {

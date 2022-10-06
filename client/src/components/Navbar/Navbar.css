@@ -242,6 +242,7 @@
 
 .navbar-container .right img {
 	cursor: pointer;
+	outline: 2px solid black;
 }
 /* right end  */
 

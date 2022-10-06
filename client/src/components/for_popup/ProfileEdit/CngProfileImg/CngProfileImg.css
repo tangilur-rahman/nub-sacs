@@ -19,13 +19,13 @@
 }
 
 .c-pro-img-container .c-pro-layout #left img {
-	width: 200px;
-	height: 200px;
+	width: 197px;
+	height: 197px;
 	aspect-ratio: 1/1;
 	object-fit: cover;
 	object-position: top center;
 	border-radius: 50%;
-	border: 3px solid white;
+	outline: 3px solid black;
 }
 
 .c-pro-img-container .c-pro-layout .wrapper #right {

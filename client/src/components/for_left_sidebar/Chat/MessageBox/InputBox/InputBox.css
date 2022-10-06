@@ -243,10 +243,10 @@
 }
 
 .file-preview .file img {
-	width: 250px;
-	height: 250px;
+	width: 247px;
+	height: 247px;
 	border-radius: 50%;
-	border: 3px solid black;
+	outline: 3px solid black;
 	object-fit: cover;
 	object-position: center;
 }
