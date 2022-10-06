@@ -156,6 +156,7 @@ audio:active {
 
 /* media query end  */
 
-::-webkit-scrollbar-thumb {
+/* for scroll color  */
+.message-box .chat-box-container::-webkit-scrollbar-thumb {
 	background: #dfdbe0;
 }
