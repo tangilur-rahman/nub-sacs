@@ -455,3 +455,50 @@
 		left: 0%;
 	}
 }
+
+/* active-status style start */
+.profile-edit-container .curr-user-info #active-status {
+	position: relative;
+}
+
+.profile-edit-container .curr-user-info #active-status-dropdown {
+	outline: 3px solid #c2daff;
+}
+
+.profile-edit-container .curr-user-info #active-status input {
+	width: 80%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.profile-edit-container .curr-user-info #active-status > div::after {
+	content: "";
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	border: 2px solid black;
+	border-radius: 50%;
+	background: #29bf12;
+	top: 10px;
+	right: 5px;
+	animation: identifier 3s linear infinite;
+}
+
+@keyframes identifier {
+	0% {
+		transform: scale(0);
+		opacity: 0;
+	}
+
+	50% {
+		transform: scale(1);
+		opacity: 1;
+	}
+
+	100% {
+		transform: scale(0);
+		opacity: 0;
+	}
+}
+/* active-status style end */

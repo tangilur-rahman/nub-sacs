@@ -9,6 +9,7 @@ import CngProfileImg from "./CngProfileImg/CngProfileImg";
 import "./ProfileEdit.css";
 
 // dropdown components
+import ActiveStatus from "./Dropdown/ActiveStatus/ActiveStatus";
 import AdvisorDropdown from "./Dropdown/AdvisorDropdown/AdvisorDropdown";
 import DepartDropdown from "./Dropdown/DepartDropdown/DepartDropdown";
 import GenderDropdown from "./Dropdown/GenderDropdown/GenderDropdown";
@@ -69,6 +70,7 @@ const ProfileEdit = ({
 	const [cpassword, setCpassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [getPhone, setPhone] = useState("");
+	const [getActiveS, setActiveS] = useState("Available now on desk");
 
 	// conform popup for delete
 	const [conformPopup, setConformPopup] = useState("");
@@ -420,6 +422,14 @@ const ProfileEdit = ({
 	}, [userEdit]);
 	// get department wise advisors for student end
 
+	// for detect office-hour for advisor's active-status start
+	function isWorkingHour(now) {
+		return now.getDay() !== 5 && now.getHours() >= 9 && now.getHours() < 17;
+	}
+
+	const officeHour = isWorkingHour(new Date(Date.now()));
+	// for detect office-hour for advisor's active-status end
+
 	return (
 		<>
 			<div
@@ -549,18 +559,19 @@ const ProfileEdit = ({
 									)}
 
 									{(userEdit.role === "advisor" ||
-										currentUser.role === "advisor") && (
-										<span id="total-students">
-											Total &nbsp;
-											{getTotalS && getTotalS > 1 ? "students" : "student"}
-											&nbsp;:&nbsp;
-											<input
-												value={getTotalS ? getTotalS : "Null"}
-												readOnly
-												style={{ width: "fit-content" }}
-											/>
-										</span>
-									)}
+										currentUser.role === "advisor") &&
+										!editT && (
+											<span id="total-students">
+												Total &nbsp;
+												{getTotalS && getTotalS > 1 ? "students" : "student"}
+												&nbsp;:&nbsp;
+												<input
+													value={getTotalS ? getTotalS : "Null"}
+													readOnly
+													style={{ width: "fit-content" }}
+												/>
+											</span>
+										)}
 
 									{userEdit.role === "student" ? (
 										<span
@@ -636,6 +647,29 @@ const ProfileEdit = ({
 										</span>
 									)}
 
+									{(userEdit.role === "advisor" ||
+										currentUser.role === "advisor") && (
+										<span id={editT ? "phone-number" : ""}>
+											<label htmlFor="phone">
+												Phone : &nbsp; {editT && <h6>+88</h6>}
+											</label>
+
+											<form style={{ display: "inline-block" }}>
+												<input
+													type={editT ? "number" : "text"}
+													name="phone"
+													id="phone"
+													autoComplete="off"
+													value={displayValue(
+														userEdit ? userEdit : currentUser
+													)}
+													readOnly={editT ? false : true}
+													onChange={(event) => setPhone(event.target.value)}
+												/>
+											</form>
+										</span>
+									)}
+
 									{!userEdit && editT && (
 										<span id="current-p" className="password-field">
 											<label htmlFor="currPassword">Current Pass..:</label>
@@ -682,28 +716,28 @@ const ProfileEdit = ({
 										</span>
 									)}
 
-									{(userEdit.role === "advisor" ||
-										currentUser.role === "advisor") && (
-										<span id={editT ? "phone-number" : ""}>
-											<label htmlFor="phone">
-												Phone : &nbsp; {editT && <h6>+88</h6>}
-											</label>
-
-											<form style={{ display: "inline-block" }}>
-												<input
-													type={editT ? "number" : "text"}
-													name="phone"
-													id="phone"
-													autoComplete="off"
-													value={displayValue(
-														userEdit ? userEdit : currentUser
-													)}
-													readOnly={editT ? false : true}
-													onChange={(event) => setPhone(event.target.value)}
-												/>
-											</form>
-										</span>
-									)}
+									{userEdit.role === "advisor" &&
+										currentUser.role !== "student" && (
+											<>
+												{editT && officeHour ? (
+													<span id="active-status-dropdown">
+														<ActiveStatus
+															getActiveS={getActiveS}
+															setActiveS={setActiveS}
+														/>
+													</span>
+												) : (
+													<span id="active-status">
+														Active_Status {officeHour && <div></div>}
+														&nbsp;:&nbsp;
+														<input
+															value={officeHour ? getActiveS : "Closed"}
+															readOnly
+														/>
+													</span>
+												)}
+											</>
+										)}
 
 									{userEdit.role === "student" ? (
 										<span
