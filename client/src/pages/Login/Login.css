@@ -137,7 +137,7 @@
 /* media query end  */
 
 /* project summary style start  */
-.login-container .project-summary-container {
+/* .login-container .project-summary-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -212,3 +212,5 @@
 .login-container .project-summary tr td:first-child {
 	font-weight: 600;
 }
+*/
+/* project summary style end */
