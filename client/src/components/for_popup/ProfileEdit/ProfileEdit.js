@@ -70,7 +70,13 @@ const ProfileEdit = ({
 	const [cpassword, setCpassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [getPhone, setPhone] = useState("");
-	const [getActiveS, setActiveS] = useState("Available now on desk");
+	const [getActiveS, setActiveS] = useState(
+		userEdit.role === "advisor"
+			? userEdit.active_status
+			: currentUser.role === "advisor"
+			? currentUser.active_status
+			: ""
+	);
 
 	// conform popup for delete
 	const [conformPopup, setConformPopup] = useState("");
@@ -112,48 +118,61 @@ const ProfileEdit = ({
 
 	// submit handler start
 	const submitHandler = async () => {
-		try {
-			const response = await fetch("/profile/update", {
-				method: "PUT",
-				body: JSON.stringify({
-					cpassword,
-					newPassword,
-					getPhone
-				}),
-				headers: { "Content-Type": "application/json" }
-			});
-
-			const result = await response.json();
-
-			if (response.status === 200) {
-				toast.success(result.message, {
-					position: "top-right",
-					theme: "colored",
-					autoClose: 3000
+		if (newPassword || getPhone || getActiveS) {
+			try {
+				const response = await fetch("/profile/update", {
+					method: "PUT",
+					body: JSON.stringify({
+						cpassword,
+						newPassword,
+						getPhone:
+							currentUser.role === "advisor"
+								? currentUser.phone === getPhone
+									? ""
+									: getPhone
+								: "",
+						active_status:
+							currentUser.role === "advisor"
+								? currentUser.active_status === getActiveS
+									? ""
+									: getActiveS
+								: ""
+					}),
+					headers: { "Content-Type": "application/json" }
 				});
-				setIsSubmitted(Date.now());
-				setCpassword("");
-				setNewPassword("");
-				setEditT(false);
-			} else if (response.status === 400) {
-				toast(result.message, {
-					position: "top-right",
-					theme: "dark",
-					autoClose: 3000
-				});
-			} else if (result.error) {
-				toast.error(result.error, {
+
+				const result = await response.json();
+
+				if (response.status === 200) {
+					toast.success(result.message, {
+						position: "top-right",
+						theme: "colored",
+						autoClose: 3000
+					});
+					setIsSubmitted(Date.now());
+					setCpassword("");
+					setNewPassword("");
+					setEditT(false);
+				} else if (response.status === 400) {
+					toast(result.error, {
+						position: "top-right",
+						theme: "dark",
+						autoClose: 3000
+					});
+				} else if (result.error) {
+					toast.error(result.error, {
+						position: "top-right",
+						theme: "colored",
+						autoClose: 3000
+					});
+				}
+			} catch (error) {
+				toast.error(error.message, {
 					position: "top-right",
 					theme: "colored",
 					autoClose: 3000
 				});
 			}
-		} catch (error) {
-			toast.error(error.message, {
-				position: "top-right",
-				theme: "colored",
-				autoClose: 3000
-			});
 		}
 	};
 	// submit handler end
@@ -716,28 +735,28 @@ const ProfileEdit = ({
 										</span>
 									)}
 
-									{userEdit.role === "advisor" &&
-										currentUser.role !== "student" && (
-											<>
-												{editT && officeHour ? (
-													<span id="active-status-dropdown">
-														<ActiveStatus
-															getActiveS={getActiveS}
-															setActiveS={setActiveS}
-														/>
-													</span>
-												) : (
-													<span id="active-status">
-														Active_Status {officeHour && <div></div>}
-														&nbsp;:&nbsp;
-														<input
-															value={officeHour ? getActiveS : "Closed"}
-															readOnly
-														/>
-													</span>
-												)}
-											</>
-										)}
+									{(userEdit.role === "advisor" ||
+										currentUser.role === "advisor") && (
+										<>
+											{editT && officeHour ? (
+												<span id="active-status-dropdown">
+													<ActiveStatus
+														getActiveS={getActiveS}
+														setActiveS={setActiveS}
+													/>
+												</span>
+											) : (
+												<span id="active-status">
+													Active_Status {officeHour && <div></div>}
+													&nbsp;:&nbsp;
+													<input
+														value={officeHour ? getActiveS : "Closed"}
+														readOnly
+													/>
+												</span>
+											)}
+										</>
+									)}
 
 									{userEdit.role === "student" ? (
 										<span

@@ -69,6 +69,12 @@ const schema = mongoose.Schema(
 			trim: true
 		},
 
+		active_status: {
+			type: String,
+			trim: true,
+			default: "Available now on desk"
+		},
+
 		minRange: Number,
 		maxRange: Number,
 
