@@ -1,5 +1,5 @@
 // external components
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // internal components
 import "./DepartDropdown.css";
@@ -27,6 +27,21 @@ const DepartDropdown = ({ getDepart, setDepart, editT }) => {
 		}
 	};
 
+	// for closing dropdown when outside clicked start
+	const myRef = useRef();
+
+	const handleClickOutside = (e) => {
+		if (!myRef.current?.contains(e.target)) {
+			setDepartDrop(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, []);
+	// for closing dropdown when outside clicked start
+
 	return (
 		<>
 			{!editT ? (
@@ -49,7 +64,7 @@ const DepartDropdown = ({ getDepart, setDepart, editT }) => {
 						value={displayDepartment()}
 						required
 					/>
-					<div className="option">
+					<div className="option" ref={myRef}>
 						<div onClick={() => setDepart("cse")}>
 							<div>💻 &nbsp;CSE</div>
 						</div>

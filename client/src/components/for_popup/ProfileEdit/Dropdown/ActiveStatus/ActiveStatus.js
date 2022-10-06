@@ -1,5 +1,5 @@
 // external components
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // internal components
 import "./ActiveStatus.css";
@@ -21,6 +21,21 @@ const ActiveStatus = ({ getActiveS, setActiveS }) => {
 		}
 	};
 
+	// for closing dropdown when outside clicked start
+	const myRef = useRef();
+
+	const handleClickOutside = (e) => {
+		if (!myRef.current?.contains(e.target)) {
+			setActiveDrop(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, []);
+	// for closing dropdown when outside clicked start
+
 	return (
 		<>
 			<div
@@ -34,7 +49,7 @@ const ActiveStatus = ({ getActiveS, setActiveS }) => {
 					value={displayingStatus()}
 					required
 				/>
-				<div className="option">
+				<div className="option" ref={myRef}>
 					<div onClick={() => setActiveS("Available now on desk")}>
 						<div>💻 &nbsp; Available now on desk</div>
 					</div>

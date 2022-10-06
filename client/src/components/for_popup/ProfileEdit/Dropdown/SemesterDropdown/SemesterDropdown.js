@@ -1,11 +1,27 @@
 // external components
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // internal components
 import "./SemesterDropdown.css";
 
 const SemesterDropDown = ({ getSemester, setSemester, editT }) => {
 	const [semesterDrop, setSemesterDrop] = useState(false);
+
+	// for closing dropdown when outside clicked start
+	const myRef = useRef();
+
+	const handleClickOutside = (e) => {
+		if (!myRef.current?.contains(e.target)) {
+			setSemesterDrop(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, []);
+	// for closing dropdown when outside clicked start
+
 	return (
 		<>
 			{!editT ? (
@@ -28,7 +44,7 @@ const SemesterDropDown = ({ getSemester, setSemester, editT }) => {
 						value={getSemester}
 						required
 					/>
-					<div className="option">
+					<div className="option" ref={myRef}>
 						<div onClick={() => setSemester("1st")}>
 							<div>1st</div>
 						</div>

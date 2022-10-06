@@ -1,5 +1,5 @@
 // external components
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import sortArray from "sort-array";
 
 // internal components
@@ -26,6 +26,21 @@ const AdvisorDropdown = ({
 		}
 	};
 
+	// for closing dropdown when outside clicked start
+	const myRef = useRef();
+
+	const handleClickOutside = (e) => {
+		if (!myRef.current?.contains(e.target)) {
+			setAdvisorDropT(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, []);
+	// for closing dropdown when outside clicked start
+
 	return (
 		<>
 			{!editT ? (
@@ -51,7 +66,7 @@ const AdvisorDropdown = ({
 						value={displayDepartment()}
 						required
 					/>
-					<div className="option">
+					<div className="option" ref={myRef}>
 						{getAdvisorArray &&
 							sortArray(getAdvisorArray, {
 								by: "updatedAt",
