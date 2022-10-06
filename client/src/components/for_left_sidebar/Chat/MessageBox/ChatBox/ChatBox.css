@@ -43,7 +43,7 @@
 }
 
 .chat-box-container .own .message {
-	background-color: #d9fdd3;
+	background-color: #bcfdb0;
 	margin: 0 10px 0 0;
 }
 .chat-box-container .other .message {
@@ -155,3 +155,7 @@ audio:active {
 }
 
 /* media query end  */
+
+::-webkit-scrollbar-thumb {
+	background: #dfdbe0;
+}
