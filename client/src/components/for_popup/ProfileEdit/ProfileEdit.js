@@ -750,7 +750,7 @@ const ProfileEdit = ({
 												</span>
 											) : (
 												<span id="active-status">
-													Active_Status {officeHour && <div></div>}
+													Active Status {officeHour && <div></div>}
 													&nbsp;:&nbsp;
 													<input
 														value={officeHour ? getActiveS : "Closed"}
@@ -897,7 +897,10 @@ const ProfileEdit = ({
 									data-aos="fade-down"
 									data-aos-delay="0"
 								>
-									<h5>Do you want to delete that appointment?</h5>
+									<h5>
+										Do you want to delete that&nbsp;
+										{userEdit.role === "advisor" ? "advisor" : "student"}?
+									</h5>
 									<div className="delete-controller">
 										<button
 											className="btn btn-dark"

@@ -470,6 +470,7 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	flex-grow: 1;
 }
 
 .profile-edit-container .curr-user-info #active-status > div::after {

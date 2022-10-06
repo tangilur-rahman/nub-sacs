@@ -12,7 +12,10 @@ myAdvisor.get("/", authUser, async (req, res) => {
 	try {
 		const document = await studentModel
 			.findOne({ _id: req.currentUser._id })
-			.populate("advisor", "name id email phone gender department profile_img");
+			.populate(
+				"advisor",
+				"name id email phone gender department profile_img active_status"
+			);
 
 		res.status(200).json(document.advisor);
 	} catch (error) {
