@@ -94,7 +94,8 @@ const updateAdvisor = async (req, res) => {
 			getMin,
 			getMax,
 			getPhone,
-			newPassword
+			newPassword,
+			active_status
 		} = req.body.userDocument;
 
 		if (getName) {
@@ -130,6 +131,10 @@ const updateAdvisor = async (req, res) => {
 				{ _id },
 				{ $set: { department: getDepart } }
 			);
+		}
+
+		if (active_status) {
+			await advisorModel.updateOne({ _id }, { $set: { active_status } });
 		}
 
 		if (getPhone) {

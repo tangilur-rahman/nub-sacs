@@ -237,6 +237,7 @@ const ProfileEdit = ({
 					: getYear && getYear.getFullYear()) ||
 				(getSemester === userEdit?.semester ? "" : getSemester) ||
 				(getPhone === userEdit?.phone ? "" : getPhone) ||
+				(getActiveS === userEdit?.active_status ? "" : getActiveS) ||
 				(getAdvisor._id === userEdit?.advisor?._id ? "" : getAdvisor._id) ||
 				newPassword
 			)
@@ -265,6 +266,8 @@ const ProfileEdit = ({
 							: getYear && getYear.getFullYear(),
 					getSemester: getSemester === userEdit?.semester ? "" : getSemester,
 					getPhone: getPhone === userEdit?.phone ? "" : getPhone,
+					active_status:
+						getActiveS === userEdit?.active_status ? "" : getActiveS,
 					getAdvisor:
 						getAdvisor._id === userEdit?.advisor?._id ? "" : getAdvisor._id,
 					newPassword
@@ -752,6 +755,7 @@ const ProfileEdit = ({
 													<input
 														value={officeHour ? getActiveS : "Closed"}
 														readOnly
+														style={{ width: "55%" }}
 													/>
 												</span>
 											)}
