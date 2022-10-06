@@ -1,6 +1,6 @@
 // external components
 import { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 // internal components
 import "./App.css";
@@ -56,7 +56,10 @@ const App = () => {
 						/>
 						<Route path="my-advisor" element={<AdvisorInfo />} />
 					</Route>
-					<Route path="login" element={<Login />} />
+					<Route path="log-in" element={<Login />} />
+
+					<Route path="login" element={<Navigate to="/log-in" />} />
+
 					<Route path="*" element={<Error />} />
 				</Routes>
 			</BrowserRouter>

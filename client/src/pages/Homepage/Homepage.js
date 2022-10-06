@@ -62,7 +62,7 @@ const Homepage = ({
 					theme: "colored",
 					autoClose: 3000
 				});
-				return Navigate("/login");
+				return Navigate("/log-in");
 			} else {
 				setCurrentUser(result);
 				setIsLoading(false);
