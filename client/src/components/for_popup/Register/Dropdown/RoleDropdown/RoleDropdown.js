@@ -1,5 +1,5 @@
 // external components
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // internal components
 import "./RoleDropdown.css";
@@ -17,6 +17,21 @@ const RoleDropdown = ({ getRole, setRole }) => {
 		}
 	};
 
+	// for closing dropdown when outside clicked start
+	const myRef = useRef();
+
+	const handleClickOutside = (e) => {
+		if (!myRef.current?.contains(e.target)) {
+			setRoleDrop(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, []);
+	// for closing dropdown when outside clicked start
+
 	return (
 		<>
 			<div
@@ -30,7 +45,7 @@ const RoleDropdown = ({ getRole, setRole }) => {
 					value={displayRole()}
 					required
 				/>
-				<div className="option">
+				<div className="option" ref={myRef}>
 					<div onClick={() => setRole("administrator")}>
 						<span>🏫 &nbsp;Administrator</span>
 					</div>
