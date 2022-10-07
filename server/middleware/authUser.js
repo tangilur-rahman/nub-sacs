@@ -41,7 +41,7 @@ const authUser = async (req, res, next) => {
 					req.currentUser = student;
 
 					if (student === null) {
-						res.status(500).json({ error: "server-side error!" });
+						res.status(500).json({ error: "Authentication Failed!" });
 					} else {
 						next();
 					}
