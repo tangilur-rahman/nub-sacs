@@ -26,6 +26,9 @@ const ProfileEdit = ({
 	// for updating homepage
 	const { setIsSubmitted } = GetContextApi();
 
+	// for loading animation until submit on server
+	const [isLoading, setIsLoading] = useState(false);
+
 	// for toggle edit option
 	const [editT, setEditT] = useState(false);
 	const [changeProfileT, setChangeProfileT] = useState(false);
@@ -119,6 +122,8 @@ const ProfileEdit = ({
 	// submit handler start
 	const submitHandler = async () => {
 		if (newPassword || getPhone || getActiveS) {
+			setIsLoading(true);
+
 			try {
 				const response = await fetch("/profile/update", {
 					method: "PUT",
@@ -152,6 +157,7 @@ const ProfileEdit = ({
 					setIsSubmitted(Date.now());
 					setCpassword("");
 					setNewPassword("");
+					setIsLoading(false);
 					setEditT(false);
 				} else if (response.status === 400) {
 					toast(result.error, {
@@ -159,12 +165,14 @@ const ProfileEdit = ({
 						theme: "dark",
 						autoClose: 3000
 					});
+					setIsLoading(false);
 				} else if (result.error) {
 					toast.error(result.error, {
 						position: "top-right",
 						theme: "colored",
 						autoClose: 3000
 					});
+					setIsLoading(false);
 				}
 			} catch (error) {
 				toast.error(error.message, {
@@ -172,6 +180,7 @@ const ProfileEdit = ({
 					theme: "colored",
 					autoClose: 3000
 				});
+				setIsLoading(false);
 			}
 		}
 	};
@@ -250,6 +259,7 @@ const ProfileEdit = ({
 			return;
 		} else {
 			try {
+				setIsLoading(true);
 				const userDocument = {
 					_id: userEdit._id,
 					department: userEdit.department,
@@ -291,18 +301,21 @@ const ProfileEdit = ({
 							theme: "colored",
 							autoClose: 3000
 						});
+						setIsLoading(false);
 					} else if (response.status === 400) {
 						toast(result.message, {
 							position: "top-right",
 							theme: "dark",
 							autoClose: 3000
 						});
+						setIsLoading(false);
 					} else if (result.error) {
 						toast.error(result.error, {
 							position: "top-right",
 							theme: "colored",
 							autoClose: 3000
 						});
+						setIsLoading(false);
 					}
 				} else if (userEdit.role === "student") {
 					const response = await fetch("/user/student-update", {
@@ -320,18 +333,21 @@ const ProfileEdit = ({
 							theme: "colored",
 							autoClose: 3000
 						});
+						setIsLoading(false);
 					} else if (response.status === 400) {
 						toast(result.message, {
 							position: "top-right",
 							theme: "dark",
 							autoClose: 3000
 						});
+						setIsLoading(false);
 					} else if (result.error) {
 						toast.error(result.error, {
 							position: "top-right",
 							theme: "colored",
 							autoClose: 3000
 						});
+						setIsLoading(false);
 					}
 				}
 			} catch (error) {
@@ -340,6 +356,7 @@ const ProfileEdit = ({
 					theme: "colored",
 					autoClose: 3000
 				});
+				setIsLoading(false);
 			}
 		}
 	};
@@ -852,14 +869,22 @@ const ProfileEdit = ({
 														className="btn btn-success"
 														onClick={submitHandlerAdmin}
 													>
-														Submit
+														{isLoading ? (
+															<i className="fa-solid fa-spinner fa-spin"></i>
+														) : (
+															"Submit"
+														)}
 													</button>
 												) : (
 													<button
 														className="btn btn-success"
 														onClick={submitHandler}
 													>
-														Submit
+														{isLoading ? (
+															<i className="fa-solid fa-spinner fa-spin"></i>
+														) : (
+															"Submit"
+														)}
 													</button>
 												)}
 											</span>
