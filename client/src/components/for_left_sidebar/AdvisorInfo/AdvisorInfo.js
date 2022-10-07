@@ -58,7 +58,17 @@ const AdvisorInfo = () => {
 
 	// for detect office-hour for advisor's active-status start
 	function isWorkingHour(now) {
-		return now.getDay() !== 5 && now.getHours() >= 9 && now.getHours() < 17;
+		if (now.getDay() >= 5 && now.getHours() >= 9 && now.getHours() <= 22) {
+			return true;
+		} else if (
+			now.getDay() <= 4 &&
+			now.getHours() >= 9 &&
+			now.getHours() <= 17
+		) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	const officeHour = isWorkingHour(new Date(Date.now()));
@@ -152,6 +162,7 @@ const AdvisorInfo = () => {
 															officeHour ? getAdvisor.active_status : "Closed"
 														}
 														readOnly
+														id="display"
 													/>
 												</span>
 											</div>

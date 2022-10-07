@@ -115,13 +115,14 @@
 	position: relative;
 }
 
-.advisor-info-container .advisor-info #active-status input {
+.advisor-info-container .advisor-info #active-status #display {
 	width: 50%;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	flex-grow: 1;
 	font-size: 15px;
+	text-transform: none !important;
 }
 
 .advisor-info-container .advisor-info #active-status > div::after {
