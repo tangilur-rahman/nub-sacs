@@ -4,8 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-/public/uploads/profile-img/
-/public/uploads/attachments/
 
 # testing
 /coverage
