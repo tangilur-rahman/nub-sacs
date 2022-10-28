@@ -12,8 +12,8 @@ const ContextHandler = ({ children }) => {
 	const [mySocket, setMySocket] = useState();
 
 	useEffect(() => {
-		setMySocket(io.connect("http://localhost:4000"));
-		// setMySocket(io.connect("https://nub-sacs.herokuapp.com"));
+		// setMySocket(io.connect("http://localhost:4000"));
+		setMySocket(io.connect("https://live-sacs.herokuapp.com"));
 	}, []);
 
 	// for get & set current user
