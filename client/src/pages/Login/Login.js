@@ -176,7 +176,7 @@ const Login = () => {
 						</div>
 					</div>
 
-					<div className="row m-0 project-summary-container">
+					{/* <div className="row m-0 project-summary-container">
 						<div className="col-10 p-0 project-summary">
 							<div className="tab-container">
 								<h6
@@ -247,7 +247,7 @@ const Login = () => {
 								</tr>
 							</table>
 						</div>
-					</div>
+					</div> */}
 				</div>
 				<ToastContainer />
 			</div>
